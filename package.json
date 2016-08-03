@@ -10,14 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexcstark/alexa-order-car.git"
+    "url": "git+https://github.com/complex-joins/alexa-order-car.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alexcstark/alexa-order-car/issues"
+  "url": "https://github.com/complex-joins/alexa-order-car/issues"
   },
-  "homepage": "https://github.com/alexcstark/alexa-order-car#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.0.0"
@@ -29,4 +28,6 @@
     "passport": "^0.3.2",
     "passport-uber": "0.0.1"
   }
+  },
+  "homepage": "https://github.com/complex-joins/alexa-order-car#readme"
 }
