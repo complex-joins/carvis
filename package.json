@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register test/index.js",
     "build": "",
     "start": ""
   },
@@ -17,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/alexcstark/alexa-order-car/issues"
   },
-  "homepage": "https://github.com/alexcstark/alexa-order-car#readme"
+  "homepage": "https://github.com/alexcstark/alexa-order-car#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0"
+  }
 }
