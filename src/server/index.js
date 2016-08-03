@@ -1,7 +1,8 @@
 import express from 'express';
-const app = express();
+import { PORT, configureServer } from './config';
 
-const PORT = 8000;
+const app = express();
+configureServer(app);
 
 app.get('/', (req, res) => {
   res.send('You\'re here! Thanks for coming!');
