@@ -1,0 +1,19 @@
+{
+  "name": "cj-alex-order-car",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/complex-joins/alexa-order-car.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/complex-joins/alexa-order-car/issues"
+  },
+  "homepage": "https://github.com/complex-joins/alexa-order-car#readme"
+}
