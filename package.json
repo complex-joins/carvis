@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register test/index.js",
+    "dev:start": "babel-node ./src/server/index.js",
     "build": "",
     "start": ""
   },
@@ -12,12 +13,13 @@
     "type": "git",
     "url": "git+https://github.com/complex-joins/alexa-order-car.git"
   },
-  "author": "",
+  "author": "Alex Stark",
   "license": "ISC",
   "bugs": {
-  "url": "https://github.com/complex-joins/alexa-order-car/issues"
+    "url": "https://github.com/complex-joins/alexa-order-car/issues"
   },
   "devDependencies": {
+    "babel-cli": "^6.11.4",
     "chai": "^3.5.0",
     "mocha": "^3.0.0"
   },
@@ -27,7 +29,6 @@
     "express": "^4.14.0",
     "passport": "^0.3.2",
     "passport-uber": "0.0.1"
-  }
   },
   "homepage": "https://github.com/complex-joins/alexa-order-car#readme"
 }
