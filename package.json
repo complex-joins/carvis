@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register test/index.js",
-    "dev:start": "babel-node ./src/server/index.js",
+    "dev:start": "nodemon ./src/server/index.js --exec babel-node --presets es2015,stage-2",
     "build": "",
     "start": ""
   },
@@ -21,7 +21,8 @@
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "chai": "^3.5.0",
-    "mocha": "^3.0.0"
+    "mocha": "^3.0.0",
+    "nodemon": "^1.10.0"
   },
   "dependencies": {
     "babel-core": "^6.11.4",
