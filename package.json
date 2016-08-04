@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run build",
+    "build:client": "",
+    "build:server": "babel ./src/server -d ../../dist/server --presets es2015,stage-2 --copy-files",
     "test": "mocha --compilers js:babel-core/register test/index.js",
     "dev:start": "nodemon ./src/server/index.js --exec babel-node --presets es2015,stage-2",
-    "build": "",
-    "start": ""
+    "build": "npm run build:client; npm run build:server",
+    "start": "node ./dist/server/index.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,7 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-qs-parser": "0.0.1",
     "express-session": "^1.14.0",
     "grant-express": "^3.6.3",
     "passport": "^0.3.2",
