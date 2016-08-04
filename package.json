@@ -27,7 +27,12 @@
   "dependencies": {
     "babel-core": "^6.11.4",
     "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "grant-express": "^3.6.3",
     "passport": "^0.3.2",
     "passport-uber": "0.0.1"
   },

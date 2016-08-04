@@ -1,5 +1,7 @@
 ### node etc ###
 
+src/server/secret
+
 # Logs
 logs
 *.log
