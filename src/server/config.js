@@ -18,7 +18,7 @@ export const configureServer = function(app) {
   app.use(session({
     secret: 'keyboard cat',
     resave: true,
-    saveUnitialized: true
+    saveUninitialized: true
   }));
   app.use(new Grant(oAuthConfigObj));
 

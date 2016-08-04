@@ -1,3 +1,4 @@
+import { UBER_CLIENT_ID, UBER_CLIENT_SECRET } from '../secret/apikeys';
 export default {
   'server': {
     'protocol': 'http',
@@ -7,8 +8,8 @@ export default {
     'state': true
   },
   'uber': {
-    'key': 'RmlykRPL_A3pOD-Ijrs-uDy0zSwtx9mZ',
-    'secret': '',
+    'key': UBER_CLIENT_ID,
+    'secret': UBER_CLIENT_SECRET,
     // 'scope': ['scope1', 'scope2'],
     'callback': '/auth/uber/callback',
   },

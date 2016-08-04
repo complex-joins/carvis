@@ -35,7 +35,9 @@
     "express-session": "^1.14.0",
     "grant-express": "^3.6.3",
     "passport": "^0.3.2",
-    "passport-uber": "0.0.1"
+    "passport-uber": "0.0.1",
+    "purest": "^3.0.0",
+    "request": "^2.74.0"
   },
   "homepage": "https://github.com/complex-joins/alexa-order-car#readme"
 }
