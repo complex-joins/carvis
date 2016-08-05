@@ -10,6 +10,7 @@ import oAuthConfigObj from './auth/oAuthConfig';
 import expressQSParser from 'express-qs-parser';
 
 export const configureServer = function(app) {
+  console.log(JSON.stringify(oAuthConfigObj));
   app.use(express.static(path.join(__dirname, '/../client')));
   app.use(express.static(path.join(__dirname, '/../../node_modules')));
   app.use(express.static('public'));
@@ -21,20 +22,5 @@ export const configureServer = function(app) {
     resave: true,
     saveUninitialized: true
   }));
-  // app.use(new Grant(oAuthConfigObj));
-  const qsParserMiddleware = expressQSParser({
-      // list of parameters to be analyzed
-    params: {
-        //applies the pattern on all matched elements thanks to the global option
-      filters: /([\w-_]+)(\>|<|\=|\!=)([\w_-]+)/g,
-      order: /(-?)([\w\s]+)/
-    },
-    // name of the request property where the middleware will store the parsed parameters
-    storage: 'parsedQuery'
-  });
-
-  app.use(qsParserMiddleware);
-
-  // app.use(passport.initialize());
-  // app.use(passport.session());
+  app.use(new Grant(oAuthConfigObj));
 };

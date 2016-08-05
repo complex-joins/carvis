@@ -3,15 +3,15 @@ export default {
   'server': {
     'protocol': 'http',
     'host': 'localhost:8000',
-    // 'callback': '/callback',
+    'callback': '/callback',
     'transport': 'session',
     'state': true
   },
   'uber': {
     'key': UBER_CLIENT_ID,
     'secret': UBER_CLIENT_SECRET,
-    // 'scope': ['scope1', 'scope2'],
-    'callback': '/auth/uber/callback',
+    // 'scope': ['profile'],
+    'callback': '/uber/callback',
   },
   'lyft': {
 
