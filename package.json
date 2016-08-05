@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "npm run build",
-    "build:client": "",
-    "build:server": "babel ./src/server -d ../../dist/server --presets es2015,stage-2 --copy-files",
+    "build:client": "node ./tools/scripts/build-client.js",
+    "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2 --copy-files",
     "test": "mocha --compilers js:babel-core/register test/index.js",
     "dev:start": "nodemon ./src/server/index.js --exec babel-node --presets es2015,stage-2",
     "build": "npm run build:client; npm run build:server",
     "start": "node ./dist/server/index.js"
+  },
+  "eslintConfig": {
+    "extends": "./tools/eslint.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,11 @@
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "chai": "^3.5.0",
+    "eslint": "^3.2.2",
+    "eslint-plugin-flowtype": "^2.4.0",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^6.0.0",
     "mocha": "^3.0.0",
     "nodemon": "^1.10.0"
   },
@@ -31,9 +39,11 @@
     "@purest/providers": "^1.0.0",
     "axios": "^0.13.1",
     "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-2": "^6.11.0",
     "body-parser": "^1.15.2",
+    "chalk": "^1.1.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-qs-parser": "0.0.1",
@@ -42,7 +52,8 @@
     "passport": "^0.3.2",
     "passport-uber": "0.0.1",
     "purest": "^3.0.0",
-    "request": "^2.74.0"
+    "request": "^2.74.0",
+    "webpack": "^1.13.1"
   },
   "homepage": "https://github.com/complex-joins/alexa-order-car#readme"
 }
