@@ -12,25 +12,25 @@ var uber = purest({provider: 'uber', config})
 
 
 
-
-export default function(app) {
-  console.log('uber config from purest', uber);
-  app.get('/uber/callback', (req, res) => {
-    let uberAccessToken = req.session.grant.response.access_token;
-    console.log(uberAccessToken);
-    let uberAuth = uber.get('me').auth(`[${uberAccessToken}]`);
-    console.log('uber auth', uberAuth);
-    uberAuth.request(function (err, res, body) {
-      console.log(res);
-      console.log(body);
-      console.log('err', err);
-      // here body is a parsed JSON object containing
-      // id, first_name, last_name, gender, username, ...
-      // res.end(JSON.stringify(req.session.grant.response, null, 2));
-    });
-  });
-
-}
+//
+// export default function(app) {
+//   console.log('uber config from purest', uber);
+//   app.get('/uber/callback', (req, res) => {
+//     let uberAccessToken = req.session.grant.response.access_token;
+//     console.log(uberAccessToken);
+//     let uberAuth = uber.get('me').auth(`[${uberAccessToken}]`);
+//     console.log('uber auth', uberAuth);
+//     uberAuth.request(function (err, res, body) {
+//       console.log(res);
+//       console.log(body);
+//       console.log('err', err);
+//       // here body is a parsed JSON object containing
+//       // id, first_name, last_name, gender, username, ...
+//       // res.end(JSON.stringify(req.session.grant.response, null, 2));
+//     });
+//   });
+//
+// }
 
 function callUberOAuth(req, res, next) {
   console.log('hit auth middleware');

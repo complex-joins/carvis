@@ -1,3 +1,6 @@
+const uberURL = `https://login.uber.com/oauth/v2/authorize?client_id=${UBER_CLIENT_ID}&response_type=code`;
+const uberExchangeURL = `https://login.uber.com/oauth/v2/token?client_secret=YOUR_CLIENT_SECRET`;
+
 // import { PORT } from '../config';
 //
 // export default new uberStrategy('uber', {
