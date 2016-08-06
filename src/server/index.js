@@ -1,12 +1,13 @@
 import express from 'express';
 import { PORT, configureServer } from './config';
 import authRoutes from './routes/authRoutes';
+import path from 'path';
 
 const app = express();
 configureServer(app);
 
 app.get('/', (req, res) => {
-  res.send('You\'re here! Thanks for coming!');
+  res.sendFile(path.join(__dirname, '/../client/index.html'));
 });
 
 authRoutes(app);

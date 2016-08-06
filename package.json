@@ -9,7 +9,8 @@
     "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2 --copy-files",
     "test": "mocha --compilers js:babel-core/register test/index.js",
     "dev:start": "nodemon ./src/server/index.js --exec babel-node --presets es2015,stage-2",
-    "build": "npm run build:client; npm run build:server",
+    "dev:build": "npm run build:client; npm run build:server",
+    "build": "npm run dev:build; docker build -t complex-joins/alexa-order-car .",
     "start": "node ./dist/server/index.js"
   },
   "eslintConfig": {
