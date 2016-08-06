@@ -37,7 +37,6 @@
     "nodemon": "^1.10.0"
   },
   "dependencies": {
-    "@purest/providers": "^1.0.0",
     "axios": "^0.13.1",
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
@@ -50,9 +49,6 @@
     "express-qs-parser": "0.0.1",
     "express-session": "^1.14.0",
     "grant-express": "^3.6.3",
-    "passport": "^0.3.2",
-    "passport-uber": "0.0.1",
-    "purest": "^3.0.0",
     "request": "^2.74.0",
     "webpack": "^1.13.1"
   },
