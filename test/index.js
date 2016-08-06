@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import learningCI from '../learnCI';
+import learningCI from './learnCI';
 
 describe('Let\'s learn CI', () => {
 
