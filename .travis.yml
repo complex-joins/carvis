@@ -17,5 +17,8 @@ deploy:
   bundle_type: ''
   application: carvis
   deployment_group: complex-joins
+  revision_type: github
   on:
     repo: complex-joins/carvis
+    branch: production
+after_deploy:
