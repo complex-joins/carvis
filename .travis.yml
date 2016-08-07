@@ -2,33 +2,25 @@ language: node_js
 node_js:
   - '6'
   - '6.1'
+- '6'
+- '6.1'
 install:
 - npm install
 script:
 - npm run dev:build
 - npm test
-
-# DOCKER
-# sudo: required
-#
-# services:
-#   - docker
-# before_install:
-#   - docker build -t carlad/sinatra .
-#   - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
-#   - docker ps -a
-#   - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
-#
-#
-# 
-# S3 DEPLOYMENT?
-#       deploy:
-#       # - provider: s3
-#         ⋮ # rest of S3 deployment for MyApp.zip
-#       - provider: codedeploy
-#         access_key_id: "YOUR AWS ACCESS KEY"
-#         secret_access_key: "YOUR AWS SECRET KEY"
-#         bucket: "S3 Bucket"
-#         key: latest/MyApp.zip
-#         application: MyApp
-#         deployment_group: MyDeploymentGroup
+deploy:
+  provider: codedeploy
+  access_key_id: AKIAJTUKSCLSLIGDCGXQ
+  secret_access_key:
+    secure: NmduFGehlpAzhR+iruvwHJHBaQMoQoxgdKvtJrNgalEvyZo4OC6O6MUFNI9YSdfLI7WbDCH+g2FhCOzznRXGrs5mEgPeS0IWDNGE2TbsaugYg2dBnvHyqJ8ofXbaXb06NfiyAdNvtxmZytSyZhdPjrNg/S+JZQXvU/coTRj4HV3Q13hMTpEWzbZekhi6AaGP8GOjOPlj7lqB0WbAUfgUfzALgQX/DHw2eGfcDF2z5xqS62uCDxJE4rPhSaZa7k2+6RZRPCSqhQ3pQ6YN4p1X88FQZRMf5725sHePV25hWjst9J1TEYgBW79sUGvkda6W2ZeBHXbS7sWkYrKfrlMVNxCWY7kn6UdLjqKusDD8VwcgUh9OuU15DZzzRDipXolsVhW/IPOJYB3HrhFqzhOS/0+DoIuyOsGZyAATNzQcVwLakfa4ErE20k+QeF3x7BUsPFIf+W7aPhM8sckLV2suO7eilwxTFodkUlzIHDkvABPggQYyBtxXgNJuH63VjNRtQl+HLY7a22lXe278beFHDt62C/46EjZWS/02m8P+42yosLyPgpGwILbdt1EbVBp5z5CvXWv8AamhuzXXnH/oLSer0W16mqmA/iD2UWfX5mXbQwqWiwE8z1X0E3ru438xRxSneZgsu30e8Ao6E+oY8NEsAG36RQXJ7cB7/lg2Xp8=
+  bucket: ''
+  key: ''
+  bundle_type: ''
+  application: carvis
+  deployment_group: complex-joins
+  revision_type: github
+  on:
+    repo: complex-joins/carvis
+    branch: production
+after_deploy:
