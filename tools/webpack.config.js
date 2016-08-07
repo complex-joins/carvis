@@ -7,8 +7,8 @@ const appDistPath = path.join(__dirname, '/../dist/client/');
 module.exports = {
   devtool: 'eval',
   entry: [
-    // require.resolve('webpack-dev-server/client'),
-    // require.resolve('webpack/hot/dev-server'),
+    require.resolve('webpack-dev-server/client'),
+    require.resolve('webpack/hot/dev-server'),
     appSrcPath
   ],
   output: {
@@ -43,8 +43,7 @@ module.exports = {
         loader: 'style!css!less'
       },
       {
-        test: /\.js$/,
-        include: appSrcPath,
+        test: /\.js/,
         loader: 'babel',
       },
       {

@@ -6,12 +6,13 @@
   "scripts": {
     "postinstall": "npm run build",
     "build:client": "node ./tools/scripts/build-client.js",
+    "dev:build:client": "node ./tools/scripts/dev-client.js",
     "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2,es2016 --copy-files",
     "test": "mocha --compilers js:babel-core/register test/index.js",
-    "src:start": "nodemon ./src/server/index.js --exec babel-node --presets es2015,stage-2",
-    "dist:start": "nodemon ./dist/server/index.js",
-    "src:build": "npm run build:client; npm run build:server",
-    "build": "npm run dev:build; docker build -t complex-joins/carvis .",
+    "start:src": "nodemon ./src/server/index.js --exec babel-node --presets es2015,stage-2",
+    "start:dist": "npm run build:server --watch; npm run dev:build:client & nodemon ./dist/server/index.js",
+    "build:src": "npm run build:client; npm run build:server",
+    "build": "npm run build:src; docker build -t complex-joins/carvis .",
     "start": "node ./dist/server/index.js"
   },
   "eslintConfig": {
@@ -46,7 +47,9 @@
     "mocha": "^3.0.0",
     "node-sass": "^3.8.0",
     "nodemon": "^1.10.0",
-    "sass-loader": "^4.0.0"
+    "opn": "^4.0.2",
+    "sass-loader": "^4.0.0",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "axios": "^0.13.1",
@@ -60,6 +63,8 @@
     "file-loader": "^0.9.0",
     "grant-express": "^3.6.3",
     "postcss": "^5.1.2",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
     "request": "^2.74.0",
     "webpack": "^1.13.1"
   },
