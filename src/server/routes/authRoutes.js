@@ -1,10 +1,22 @@
-import passport from 'passport';
+import path from 'path';
 
 export default function(app) {
-  app.get('/uber/callback', (req, res) => {
-    res.end(JSON.stringify(req.session.grant.response, null, 2));
+  app.post('/auth/phoneNumber', (req, res) => {
+    // MAKE REQUEST TO LYFT FOR 4 DIGIT CODE
+    let phoneNumber = req.body.phoneNumber;
+    console.log('phone number is ', phoneNumber);
+
+    res.redirect('/auth/lyftCode');
   });
-  app.get('/lyft/callback', (req, res) => {
-    res.end(JSON.stringify(req.session.grant.response, null, 2));
+
+  app.get('/auth/lyftCode', (req, res) => {
+    res.sendFile(path.join(__dirname, '/../../client/codeForm.html'));
+  });
+
+  app.post('/auth/lyftCode', (req, res) => {
+    let lyftCode = req.body.lyftCode;
+    console.log('got code', lyftCode);
+    // RETURN 4 digit code
+    res.send('success!');
   });
 }

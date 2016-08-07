@@ -7,7 +7,7 @@ const app = express();
 configureServer(app);
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './splash/splash.html'));
+  res.sendFile(path.join(__dirname, '/../client/phoneForm.html'));
 });
 
 authRoutes(app);
