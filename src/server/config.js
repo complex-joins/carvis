@@ -4,11 +4,9 @@ import path from 'path';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import Grant from 'grant-express';
-import oAuthConfigObj from './auth/oAuthConfig';
+
 
 export const configureServer = function(app) {
-  console.log(JSON.stringify(oAuthConfigObj));
   app.use(express.static(path.join(__dirname, '/../client')));
   app.use(express.static(path.join(__dirname, '/../../node_modules')));
   app.use(express.static('public'));
@@ -20,5 +18,4 @@ export const configureServer = function(app) {
     resave: true,
     saveUninitialized: true
   }));
-  app.use(new Grant(oAuthConfigObj));
 };

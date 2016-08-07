@@ -1,16 +1,19 @@
 const path = require('path');
 
+const nodeModulesPath = path.join(__dirname, '/../node_modules');
+const appSrcPath = path.join(__dirname, '/../src/client/index.js');
+const appDistPath = path.join(__dirname, '/../dist/client/');
 module.exports = {
   devtool: 'eval',
   entry: [
     // require.resolve('webpack-dev-server/client'),
     // require.resolve('webpack/hot/dev-server'),
     // require.resolve('./polyfills'),
-    path.join(__dirname, '/../src/client/')
+    appSrcPath
   ],
   output: {
     // Next line is not used in dev but WebpackDevServer crashes without it:
-    path: path.join(__dirname, '/../dist/client'),
+    path: appDistPath,
     pathinfo: true,
     filename: 'bundle.js',
     publicPath: '/'
@@ -33,47 +36,39 @@ module.exports = {
   //   root: paths.ownNodeModules,
   //   moduleTemplates: ['*-loader']
   // },
-  // module: {
-  //   preLoaders: [
-  //     {
-  //       test: /\.js$/,
-  //       loader: 'eslint',
-  //       include: paths.appSrc,
-  //     }
-  //   ],
-  //   loaders: [
-  //     {
-  //       test: /\.js$/,
-  //       include: paths.appSrc,
-  //       loader: 'babel',
-  //       query: require('./babel.dev')
-  //     },
-  //     {
-  //       test: /\.css$/,
-  //       include: [paths.appSrc, paths.appNodeModules],
-  //       loader: 'style!css!postcss'
-  //     },
-  //     {
-  //       test: /\.json$/,
-  //       include: [paths.appSrc, paths.appNodeModules],
-  //       loader: 'json'
-  //     },
-  //     {
-  //       test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-  //       include: [paths.appSrc, paths.appNodeModules],
-  //       loader: 'file',
-  //     },
-  //     {
-  //       test: /\.(mp4|webm)$/,
-  //       include: [paths.appSrc, paths.appNodeModules],
-  //       loader: 'url?limit=10000'
-  //     }
-  //   ]
-  // },
-  // eslint: {
-  //   configFile: path.join(__dirname, 'eslint.js'),
-  //   useEslintrc: false
-  // },
+  module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'eslint',
+        include: appSrcPath,
+      }
+    ],
+    loaders: [
+      { test: /\.html$/,
+        loader: 'file?name=[name].[ext]'
+      },
+      {
+        test: /\.css$/,
+        include: [appSrcPath, nodeModulesPath],
+        loader: 'style!css!postcss'
+      },
+      {
+        test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
+        include: [appSrcPath, nodeModulesPath],
+        loader: 'file',
+      },
+      {
+        test: /\.js$/,
+        include: appSrcPath,
+        loader: 'babel',
+      },
+    ]
+  },
+  eslint: {
+    configFile: path.join(__dirname, 'eslint.js'),
+    useEslintrc: false
+  },
 //   postcss: function() {
 //     return [autoprefixer];
 //   },

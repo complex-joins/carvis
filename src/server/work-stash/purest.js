@@ -1,16 +1,16 @@
-import passport from 'passport';
-import { UBER_CLIENT_ID } from '../secret/apikeys';
-import axios from 'axios';
-
-const uberURL = `https://login.uber.com/oauth/v2/authorize?client_id=${UBER_CLIENT_ID}&response_type=code`;
-const uberExchangeURL = `https://login.uber.com/oauth/v2/token?client_secret=YOUR_CLIENT_SECRET`;
-
-var request = require('request')
-var purest = require('purest')({request})
-var config = require('@purest/providers')
-var uber = purest({provider: 'uber', config})
-
-
+// import passport from 'passport';
+// import { UBER_CLIENT_ID } from '../secret/apikeys';
+// import axios from 'axios';
+//
+// const uberURL = `https://login.uber.com/oauth/v2/authorize?client_id=${UBER_CLIENT_ID}&response_type=code`;
+// const uberExchangeURL = `https://login.uber.com/oauth/v2/token?client_secret=YOUR_CLIENT_SECRET`;
+//
+// var request = require('request')
+// var purest = require('purest')({request})
+// var config = require('@purest/providers')
+// var uber = purest({provider: 'uber', config})
+//
+//
 
 //
 // export default function(app) {
@@ -31,15 +31,3 @@ var uber = purest({provider: 'uber', config})
 //   });
 //
 // }
-
-function callUberOAuth(req, res, next) {
-  console.log('hit auth middleware');
-  axios.get()
-    .then((results) => {
-      console.log(results);
-      res.send(results);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
