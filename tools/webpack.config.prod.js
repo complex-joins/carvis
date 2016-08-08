@@ -6,11 +6,7 @@ const appDistPath = path.join(__dirname, '/../dist/client/');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    require.resolve('webpack-dev-server/client'),
-    require.resolve('webpack/hot/dev-server'),
-    appSrcPath
-  ],
+  entry: appSrcPath,
   output: {
     path: appDistPath,
     pathinfo: true,
@@ -43,7 +39,8 @@ module.exports = {
         loader: 'style!css!less'
       },
       {
-        test: /\.js/,
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         loader: 'babel',
       },
       {
@@ -56,5 +53,4 @@ module.exports = {
     configFile: path.join(__dirname, 'eslint.js'),
     useEslintrc: false
   },
-
 };

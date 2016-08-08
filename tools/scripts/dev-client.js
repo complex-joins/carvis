@@ -6,7 +6,7 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var execSync = require('child_process').execSync;
 var opn = require('opn');
-var config = require('../webpack.config');
+var config = require('../webpack.config.dev.js');
 
 // Tools like Cloud9 rely on this
 const SERVER_PORT = process.env.PORT || 8000;
@@ -72,6 +72,7 @@ function openBrowser(port) {
 function runDevServer(serverPort, webpackPort) {
   new WebpackDevServer(webpack(config), {
     historyApiFallback: true,
+    inline: true,
     hot: true, // Note: only CSS is currently hot reloaded
     publicPath: '/',
     quiet: true,

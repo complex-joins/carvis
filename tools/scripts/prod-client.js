@@ -1,4 +1,4 @@
-const config = require('../webpack.config');
+const config = require('../webpack.config.prod');
 const webpack = require('webpack');
 const chalk = require('chalk');
 
