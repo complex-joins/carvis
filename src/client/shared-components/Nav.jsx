@@ -9,7 +9,7 @@ export default (props) => (
           Menu <i className="fa fa-bars"></i>
         </button>
         <a className="navbar-brand page-scroll" href="#page-top">
-          <i className="fa fa-play-circle"></i> <span className="light">Start</span> Bootstrap
+          Find a Car
         </a>
       </div>
 
@@ -20,9 +20,6 @@ export default (props) => (
           </li>
           <li>
             <a className="page-scroll" href="#about">About</a>
-          </li>
-          <li>
-            <a className="page-scroll" href="#download">Download</a>
           </li>
           <li>
             <a className="page-scroll" href="#contact">Contact</a>
