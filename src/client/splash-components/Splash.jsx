@@ -7,7 +7,6 @@ export default class Splash extends React.Component {
       <div className="fullHeight">
         <Header />
         <About />
-        <Map />
         <Contact />
       </div>
     );
