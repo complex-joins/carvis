@@ -19,7 +19,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['', '.jsx', '.js', '.json'],
   },
   resolveLoader: {
     root: nodeModulesPath,

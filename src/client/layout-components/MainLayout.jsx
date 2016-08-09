@@ -11,9 +11,11 @@ export default class MainLayout extends React.Component {
   }
 
   render() {
+    let currentLocation = this.props.location.pathname;
+    console.log('now at', currentLocation);
     return (
       <div className="fullHeight">
-        <Nav />
+        <Nav location={currentLocation}/>
         {this.props.children}
         <Footer />
       </div>

@@ -17,7 +17,7 @@ export default class Auth extends React.Component {
             </Link>
           </li>
           <li>
-            <Link to="/auth/lyftPhoneNumber">
+            <Link to="/lyftAuth">
               <div className="btn btn-default btn-lg carIconHolder">
                 <img className="carIcon" src="../img/lyfticon.png" alt=""/>
                 <span className="network-name">Authorize Lyft</span>
@@ -26,7 +26,7 @@ export default class Auth extends React.Component {
             </Link>
           </li>
           <li>
-            <Link to="/auth/uberAuth">
+            <Link to="/uberAuth">
               <div className="btn btn-default btn-lg carIconHolder">
                 <img className="carIcon" src="../img/ubericon.png" alt=""/>
                 <span className="network-name">Authorize Uber</span>

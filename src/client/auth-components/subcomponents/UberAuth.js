@@ -7,7 +7,7 @@ export default (props) => (
         <div className="row">
           <div className="col-xs-3"></div>
           <div className="col-xs-2">
-            <label for="example-tel-input" className=" col-form-label">Uber Account Email</label>
+            <label htmlFor="example-tel-input" className=" col-form-label">Uber Account Email</label>
           </div>
           <div className="col-xs-3">
             <input className="form-control blackTextInput" type="email" id="email-input"/>
@@ -18,7 +18,7 @@ export default (props) => (
         <div className="row">
           <div className="col-xs-3"></div>
           <div className="col-xs-2">
-            <label for="example-tel-input" className=" col-form-label">Uber Account Password</label>
+            <label htmlFor="example-tel-input" className=" col-form-label">Uber Account Password</label>
           </div>
           <div className="col-xs-3">
             <input className="form-control blackTextInput" type="password" id="email-input"/>

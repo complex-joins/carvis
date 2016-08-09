@@ -7,13 +7,9 @@ const app = express();
 configureServer(app);
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../client/phoneForm.html'));
+  res.sendFile(path.join(__dirname, '/../client/index.html'));
 });
 
-app.get('/splash', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../client/splash.html'));
-});
-console.log('hello');
 authRoutes(app);
 
 app.listen(PORT, () => {

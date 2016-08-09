@@ -7,12 +7,12 @@ export default (props) => (
       <div className="form-group row">
         <div className="col-xs-3"></div>
 
-        <label for="username" className="col-xs-1 col-form-label">Username</label>
+        <label htmlFor="username" className="col-xs-1 col-form-label">Username</label>
         <div className="col-xs-2">
           <input type="username" className="blackTextInput" name="" />
         </div>
 
-        <label for="password" className="col-xs-1 col-form-label">Password</label>
+        <label htmlFor="password" className="col-xs-1 col-form-label">Password</label>
         <div className="col-xs-2">
           <input type="password" className="blackTextInput" name="" />
         </div>

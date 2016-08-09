@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Splash from './splash-components/Splash';
 import Auth from './auth-components/Auth';
-import {LyftCode, LyftAuth, UberAuth, Login} from './auth-components/AuthComponents';
+import {LyftCode, LyftAuth, lyftPhoneNumber, UberAuth, Login} from './auth-components/AuthComponents';
 import MainLayout from './layout-components/MainLayout';
 import Order from './order-components/Order';
 import NoMatch from './layout-components/NoMatch';
@@ -22,10 +22,9 @@ ReactDOM.render(
       </Route>
       <Route path="auth" component={Auth}>
         <Route path="login" component={Login}></Route>
-        <Route path="lyftPhoneNumber" component={LyftAuth}></Route>
-        <Route path="lyftCode" component={LyftCode}></Route>
-        <Route path="uberAuth" component={UberAuth}></Route>
       </Route>
+      <Route path="lyftAuth" component={LyftAuth}></Route>
+      <Route path="uberAuth" component={UberAuth}></Route>
     </Route>
     <Route path="*" component={NoMatch}></Route>
   </Router>
