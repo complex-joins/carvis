@@ -6,7 +6,7 @@ body {
     height: 100%;
     font-family: "Lora","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: white;
-    background-color: black;
+    background-color: @backgroundColor;
 }
 
 html {
@@ -129,7 +129,7 @@ a {
     padding: 100px 0;
     text-align: center;
     color: white;
-    background: url(../img/jarvishome.jpg) no-repeat center scroll;
+    background: url(../img/citydark.jpg) no-repeat center scroll;
     background-color: black;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -342,4 +342,27 @@ body {
 
 .fullHeight {
   height: 100%;
+}
+
+.carIcon {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about {
+  background: url(../img/jarvisdark.jpg) no-repeat center center scroll;
+  background-size: cover;
+}
+
+.blackTextInput {
+  color: black;
+}
+
+.padLeft {
+  padding-left: 10px;
+}
+
+.carIconHolder img {
+  margin: 0 auto;
 }

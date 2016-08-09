@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  # web-database:
+  #   image: postgres
+  web:
+    image: alexcstark/carvis-dev
+    # volumes allows us to 'poke' that hole in the container to share a fs
+    # /opt/app is the working directory
+    volumes:
+      - ./:/opt/app
+    ports:
+      - 8000:8000

@@ -1,8 +1,8 @@
 const path = require('path');
 
-const nodeModulesPath = path.join(__dirname, '/../node_modules');
+const nodeModulesPath = path.join(__dirname, './node_modules');
 const appSrcPath = path.join(__dirname, './src/client/index.js');
-const appDistPath = path.join(__dirname, '/../dist/client/');
+const appDistPath = path.join(__dirname, './dist/client/');
 
 module.exports = {
   devtool: 'eval',
@@ -47,6 +47,9 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
       },
       {
         test: /\.scss$/,

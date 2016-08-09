@@ -2,7 +2,7 @@ import React from 'react';
 
 // NAV
 export default (props) => (
-  <nav className="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <nav className="navbar navbar-custom navbar-top" role="navigation">
     <div className="container">
       <div className="navbar-header">
         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">

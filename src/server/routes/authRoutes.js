@@ -9,10 +9,6 @@ export default function(app) {
     res.redirect('/auth/lyftCode');
   });
 
-  app.get('/auth/lyftCode', (req, res) => {
-    res.sendFile(path.join(__dirname, '/../../client/codeForm.html'));
-  });
-
   app.post('/auth/lyftCode', (req, res) => {
     let lyftCode = req.body.lyftCode;
     console.log('got code', lyftCode);
