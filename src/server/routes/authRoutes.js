@@ -1,22 +1,23 @@
-import path from 'path';
-
 export default function(app) {
-  app.post('/auth/phoneNumber', (req, res) => {
+  app.post('/auth/lyftAuth', (req, res) => {
     // MAKE REQUEST TO LYFT FOR 4 DIGIT CODE
     let phoneNumber = req.body.phoneNumber;
     console.log('phone number is ', phoneNumber);
-
-    res.redirect('/auth/lyftCode');
-  });
-
-  app.get('/auth/lyftCode', (req, res) => {
-    res.sendFile(path.join(__dirname, '/../../client/codeForm.html'));
+    res.json({message: 'on its way'});
   });
 
   app.post('/auth/lyftCode', (req, res) => {
     let lyftCode = req.body.lyftCode;
     console.log('got code', lyftCode);
     // RETURN 4 digit code
-    res.send('success!');
+    res.json({message: 'yes!'});
+  });
+
+  app.post('/auth/signup', (req, res) => {
+    // Create user creds, walk thrme through setting up alexa, lyft, etc
+  });
+
+  app.post('/auth/login', (req, res) => {
+    // Basic auth
   });
 }
