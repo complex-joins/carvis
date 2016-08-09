@@ -18,28 +18,31 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
 
 > Some usage instructions
 
 ## Requirements
-
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
 
 ## Development
 
 ### Installing Dependencies
 
 From within the root directory:
-
 ```sh
-sudo npm install -g bower
 npm install
-bower install
+```
+
+### Usage
+
+Run the following command for hot building of front and back end
+```sh
+npm start:dev
+```
+
+
+Run the following command for a static build
+```sh
+npm start
 ```
 
 ### Roadmap
