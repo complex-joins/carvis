@@ -1,8 +1,13 @@
 import React from 'react';
 
 export default (props) => (
-  <div className="container">
-    <form action="/auth/uberAuth" method="POST">
+  <div className="container fullHeight text-center jarvisbg">
+    <h1>Authorize Uber</h1>
+    <div className="carIconHolder">
+      <img className="carIcon" src="../img/ubericon.png" alt=""/>
+      <br/>
+    </div>
+    <form action="/auth/uberAuth" method="POST" className="text-center">
       <div className="form-group">
         <div className="row">
           <div className="col-xs-3"></div>

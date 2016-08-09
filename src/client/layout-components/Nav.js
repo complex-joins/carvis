@@ -36,6 +36,31 @@ function determineNavButtons(props) {
         </li>
       </ul>
     );
+  case '/lyftAuth':
+    return (
+      <ul className="nav navbar-nav">
+        <li>
+          <Link to="/auth">Go Back</Link>
+        </li>
+        <li>
+          <Link to="/uberAuth">Switch to Uber</Link>
+        </li>
+      </ul>
+    );
+  case '/uberAuth':
+    return (
+      <ul className="nav navbar-nav">
+        <li className="hidden">
+          <a href="#page-top"></a>
+        </li>
+        <li>
+          <Link to="/auth">Go Back</Link>
+        </li>
+        <li>
+          <Link to="/lyftAuth">Switch to Lyft</Link>
+        </li>
+      </ul>
+    );
   default:
     return (<ul className="nav navbar-nav"></ul>);
   }

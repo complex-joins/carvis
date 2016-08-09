@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 export default class Auth extends React.Component {
   render() {
     return (
-      <div className="container text-center">
+      <div className="container text-center jarvisbg fullHeight">
         <h1>Authorize your application</h1>
         <ul className="list-inline banner-social-buttons">
           <li>

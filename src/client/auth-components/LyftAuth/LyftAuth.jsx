@@ -15,7 +15,7 @@ export default class LyftAuth extends React.Component {
   render() {
     if (!this.state.waitingForCode) {
       return (
-        <div className="container carIconHolder text-center">
+        <div className="container fullHeight carIconHolder text-center jarvisbg">
           <h1>Authorize Lyft</h1>
           <img className="carIcon" src="../img/lyfticon.png" alt=""/>
           {this.props.children}
@@ -24,7 +24,7 @@ export default class LyftAuth extends React.Component {
       );
     } else {
       return (
-        <div className="container carIconHolder text-center">
+        <div className="container fullHeight carIconHolder text-center jarvisbg">
           <h1>Authorize Lyft</h1>
           <img className="carIcon" src="../img/lyfticon.png" alt=""/>
           {this.props.children}

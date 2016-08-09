@@ -1,6 +1,5 @@
 import React from 'react';
 import Nav from './Nav';
-import Footer from './Footer';
 
 export default class MainLayout extends React.Component {
   constructor(props) {
@@ -17,7 +16,6 @@ export default class MainLayout extends React.Component {
       <div className="fullHeight">
         <Nav location={currentLocation}/>
         {this.props.children}
-        <Footer />
       </div>
       );
   }

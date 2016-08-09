@@ -7,6 +7,7 @@ services:
     image: alexcstark/carvis
     # volumes allows us to 'poke' that hole in the container to share a fs
     # /opt/app is the working directory
+    command: npm run start:dev 
     volumes:
       - ./:/opt/app
     ports:
