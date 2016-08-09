@@ -12,4 +12,12 @@ export default function(app) {
     // RETURN 4 digit code
     res.json({message: 'yes!'});
   });
+
+  app.post('/auth/signup', (req, res) => {
+    // Create user creds, walk thrme through setting up alexa, lyft, etc
+  });
+
+  app.post('/auth/login', (req, res) => {
+    // Basic auth
+  });
 }

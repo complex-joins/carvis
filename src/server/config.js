@@ -1,10 +1,11 @@
-export const PORT = process.env.PORT || 8000;
 import express from 'express';
 import path from 'path';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
+
+export const PORT = process.env.PORT || 8000;
 
 export const configureServer = function(app) {
   app.use(express.static(path.join(__dirname, '/../client')));

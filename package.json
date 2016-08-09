@@ -11,7 +11,7 @@
     "test": "mocha --compilers js:babel-core/register test/index.js",
     "build": "npm run build:client; npm run build:server",
     "start:dev": "docker-compose up",
-    "start:docker": "npm run build:server --watch & nodemon -L ./dist/server/index.js",
+    "start:docker": "npm run build:server -- -w & nodemon -L ./dist/server/index.js",
     "start": "npm run build; node ./dist/server/index.js"
   },
   "eslintConfig": {
