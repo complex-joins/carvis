@@ -1,4 +1,4 @@
-FROM node:argon
+FROM node:latest
 
 # Install app dependencies
 ADD package.json /tmp/package.json
@@ -14,4 +14,4 @@ ENV hello 'hello'
 ADD . /opt/app
 
 EXPOSE 8000
-CMD [ "npm", "start" ]
+CMD [ "npm", "start:docker" ]
