@@ -1,6 +1,6 @@
 ### node etc ###
 
-src/server/secret
+secret
 work-stash
 
 # Logs

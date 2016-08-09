@@ -13,6 +13,13 @@ export default function(app) {
     res.json({message: 'yes!'});
   });
 
+  app.post('/auth/uberAuth', (req, res) => {
+    let uberObj = req.body;
+    // USE THESE UBER CREDS
+    console.log('got uber obj', uberObj);
+    res.json({message: 'on its way'});
+  });
+
   app.post('/auth/signup', (req, res) => {
     // Create user creds, walk thrme through setting up alexa, lyft, etc
   });
