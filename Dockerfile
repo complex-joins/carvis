@@ -14,4 +14,4 @@ WORKDIR /opt/app
 ADD . /opt/app
 
 EXPOSE 8000
-CMD [ "npm", "run", "start:docker" ]
+CMD [ "npm", "start" ]
