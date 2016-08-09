@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Splash from './splash-components/Splash';
 import Auth from './auth-components/Auth';
-import {LyftCode, LyftAuth, lyftPhoneNumber, UberAuth, Login} from './auth-components/AuthComponents';
+import {LyftAuth, UberAuth, Login} from './auth-components/AuthComponents';
 import MainLayout from './layout-components/MainLayout';
 import Order from './order-components/Order';
 import NoMatch from './layout-components/NoMatch';
