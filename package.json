@@ -8,6 +8,7 @@
     "build:client": "node ./tools/scripts/prod-client.js",
     "start:dev": "webpack -w & npm run build:server -- -w & nodemon -L ./dist/server/index.js",
     "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2,es2016 --copy-files",
+    "setup": "cd ..; git clone https://github.com/alexcstark/carvis-private-info.git; cd -; node ./tools/resolveGitIgnored.js; cd ..; rm -rf carvis-private-info",
     "test": "mocha --compilers js:babel-core/register test/index.js",
     "build": "npm run build:client; npm run build:server",
     "start": "npm run build; node ./dist/server/index.js"

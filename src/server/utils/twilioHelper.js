@@ -1,4 +1,4 @@
-var twilioCredentials = require('./anotherConfig.js');
+var twilioCredentials = require('../../../secret/config.js').twilioCredentials;
 var client = require('twilio')(twilioCredentials.accountSid, twilioCredentials.authToken);
 
 // NOTE: Twilio will only work with approved numbers on the free trial account, for now Chris' number is approved.
@@ -10,7 +10,7 @@ var client = require('twilio')(twilioCredentials.accountSid, twilioCredentials.a
 function createMessage(number, message) {
   client.messages.create({
     to: number,
-    from: "+19495417437", 
+    from: "+19495417437",
     body: message
   }, function (err, message) {
     // The HTTP request to Twilio will run asynchronously. This callback

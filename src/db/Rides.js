@@ -1,6 +1,7 @@
 import {db} from './db';
 
-const rideHistorySchema = {
+const ridesSchema = {
+  userId: 'number',
   date: 'string',
   chosenRide: 'string',
   uberCost: 'string',
@@ -10,11 +11,11 @@ const rideHistorySchema = {
 };
 
 
-db.createTableIfNotExists('rideHistory', rideHistorySchema)
+db.createTableIfNotExists('rides', ridesSchema)
 .then(() =>
 db.end());
 
-const RideHistory = db.model('rideHistory', rideHistorySchema);
+const Ride = db.model('rides', ridesSchema);
 
 
-export default RideHistory;
+export default Ride;
