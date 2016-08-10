@@ -32,6 +32,11 @@ From within the root directory:
 npm install
 ```
 
+If you're a member of the Complex-Joins team, update your secret config (create an empty file /secret/config.js first if you haven't already):
+```sh
+npm run setup
+```
+
 ### Usage
 
 Run the following command for hot building of front and back end
