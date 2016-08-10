@@ -65,7 +65,12 @@ export default class Entity {
 
   select(obj) {
     return this.findOne(obj)
-    .then((one) => new RelationshipQuery(one, this.table, this.relationships));
+    .then((one) => {
+      let rq = new RelationshipQuery(one, this.table, this.relationships);
+      return rq;
+    })
+    .catch((err) => console.log(err));
+
   }
   // TODO try to make synchronous
   // _runEventLoop () {
