@@ -41,7 +41,7 @@ npm run setup
 
 Run the following command for hot building of front and back end
 ```sh
-npm start:dev
+npm run start:dev
 ```
 
 
