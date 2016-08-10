@@ -1,0 +1,16 @@
+{
+  "name": "stork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "stork.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "lodash": "^4.14.2",
+    "sql": "^0.70.1"
+  }
+}
