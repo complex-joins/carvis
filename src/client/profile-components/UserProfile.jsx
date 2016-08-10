@@ -4,9 +4,9 @@ import Settings from './Settings';
 
 export default class UserPanel extends React.Component {
   render() {
+    console.log(this.props.params);
     return (
       <div className="fullHeight">
-        {this.props.children}
       </div>
       );
   }

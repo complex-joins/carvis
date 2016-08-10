@@ -1,6 +1,7 @@
+/* eslint-disable */
 async function select() {
-  let message = await fakeAsync();
-  return message;
+  let test = await fakeAsync();
+  return test;
 }
 
 
@@ -11,3 +12,5 @@ function fakeAsync() {
     }, 1000);
   });
 }
+
+console.log(select());

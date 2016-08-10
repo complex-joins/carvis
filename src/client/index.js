@@ -6,6 +6,7 @@ import Auth from './auth-components/Auth';
 import {LyftAuth, UberAuth, Login} from './auth-components/AuthComponents';
 import MainLayout from './layout-components/MainLayout';
 import NoMatch from './layout-components/NoMatch';
+import UserProfile from './profile-components/UserProfile';
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       </Route>
       <Route path="lyftAuth" component={LyftAuth}></Route>
       <Route path="uberAuth" component={UberAuth}></Route>
+      <Route path=":userid/profile" component={UserProfile}></Route>
     </Route>
     <Route path="*" component={NoMatch}></Route>
   </Router>
