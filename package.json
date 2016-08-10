@@ -43,6 +43,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "mocha": "^3.0.0",
+    "nodemon": "^1.10.0",
     "opn": "^4.0.2",
     "sass-loader": "^4.0.0",
     "webpack-dev-server": "^1.14.1"
