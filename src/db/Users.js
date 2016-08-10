@@ -1,5 +1,5 @@
 import { db } from './db';
-import RideHistory from './RideHistory';
+import Rides from './RideHistory';
 
 const userSchema = {
   username: 'string',
@@ -10,14 +10,16 @@ const userSchema = {
 // .then(() =>
 // db.end());
 
-const Users = db.model('users', userSchema, {hash: true});
+const User = db.model('users', userSchema, {hash: true});
 
-console.log(Users);
 
-Users.save({username: 'alex', password: 'pass'});
-Users.hasMany(RideHistory);
-Users.select({username: 'alex'}).show(rideHistory);
+// User.save({username: 'alex', password: 'pass'});
+User.hasMany(Rides).through('userId');
+
+console.log(User.select({username: 'alex'}));
+User.select({username:'alex'}).then(()=>)
+// .show(Rides);
 
 console.log(db.relationships);
 
-export default Users;
+export default User;

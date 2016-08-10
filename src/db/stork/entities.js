@@ -60,7 +60,7 @@ export default class Entity {
   }
 
   hasMany(entity) {
-    return new RelationshipBuilder(this, entity, this.relationships)
+    return new RelationshipBuilder(this, entity, this.relationships);
   }
 
   select(obj) {

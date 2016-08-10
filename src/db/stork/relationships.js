@@ -20,7 +20,3 @@ export class RelationshipQuery {
     return this.destination.find({[this.relationshipKey]: this.originObject.id});
   }
 }
-
-User.select({username: 'alex'}).show(Rides);
-
-User.hasMany(Rides).through(userId);
