@@ -13,7 +13,7 @@ export default function(app) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftCode', (req, res) => { // second call submits that code
     let lyftCode = req.body.lyftCode;
     console.log('got code', lyftCode);
-    lyftHelper.lyftPhoneCodeAuth(phoneNumber, lyftCode, session, userLocation);
+    lyftHelper.lyftPhoneCodeAuth(lyftCode, '4242179767');
     // NOTE: need to pass phoneNumber, session and userLocation from DB
     res.json({message: 'yes!'});
   });

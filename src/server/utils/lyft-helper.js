@@ -36,9 +36,11 @@ var refreshBearerToken = function () {
 };
 
 var lyftPhoneAuth = function (phoneNumberString) {
-  var url = baseURL + lyftMethods.phoneAuth.path;
+  var url = lyftMethods.phoneAuth.path;
   var headers = lyftMethods.phoneAuth.headers();
   var body = lyftMethods.phoneAuth.body(phoneNumberString);
+
+  console.log('lyftPhoneAuth number', phoneNumberString, 'body', body, 'headers', headers, 'url', url);
 
   fetch(url, {
       method: 'POST',
@@ -59,13 +61,15 @@ var lyftPhoneAuth = function (phoneNumberString) {
 };
 
 // NOTE: userLocation should come from the user client // Alexa.
-var lyftPhoneCodeAuth = function (phoneNumber, fourDigitCode, session, userLocation) {
+var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, session, userLocation) {
 
   userLocation = userLocation || null; // pass through userLocation if we have one, otherwise use randomly generated location.
 
-  var url = baseURL + lyftMethods.phoneCodeAuth.path;
+  var url = lyftMethods.phoneCodeAuth.path;
   var headers = lyftMethods.phoneCodeAuth.headers(session);
-  var body = lyftMethods.phoneCodeAuth.body(phoneNumber, fourDigitCode, userLocation);
+  var body = lyftMethods.phoneCodeAuth.body(fourDigitCode, phoneNumber, userLocation);
+
+  console.log('lyftPhoneCodeAuth number', fourDigitCode, phoneNumber, 'body', body, 'headers', headers, 'url', url);
 
   fetch(url, {
       method: 'POST',

@@ -7,7 +7,7 @@ export default class LyftAuth extends React.Component {
     super(props);
     this.state = {
       phoneNumber: '',
-      code: '',
+      lyftCode: '',
       waitingForCode: false
     };
   }
@@ -42,7 +42,7 @@ export default class LyftAuth extends React.Component {
 
   handleCode(e) {
     e.preventDefault(e);
-    axios.post('/auth/lyftCode', {lyftCode: this.state.code})
+    axios.post('/auth/lyftCode', {lyftCode: this.state.lyftCode})
     .then((res) => {
       console.log(res);
     });
