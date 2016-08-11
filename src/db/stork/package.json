@@ -11,6 +11,7 @@
   "dependencies": {
     "bluebird": "^3.4.1",
     "lodash": "^4.14.2",
+    "mixwith": "^0.1.1",
     "sql": "^0.70.1"
   }
 }

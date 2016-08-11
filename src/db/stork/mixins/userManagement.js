@@ -1,11 +1,10 @@
-import Entity from './entities';
-import qh from './helpers';
+import H from '../helpers';
 import bcrypt from 'bcrypt-nodejs';
 
-export default class Users extends Entity {
+const UserManagement = (superclass) => class extends superclass {
   create(obj) {
     console.log('make from obj', obj);
-    return this.pg.query(qh.createInsertQuery(this.table, this.schema, {
+    return this.pg.query(H.createInsertQuery(this.table, this.schema, {
       username: obj.username,
       password: this.generateHash(obj.password)
     }));
@@ -26,4 +25,6 @@ export default class Users extends Entity {
     })
     .catch((err) => console.log(err));
   }
-}
+};
+
+export default UserManagement;

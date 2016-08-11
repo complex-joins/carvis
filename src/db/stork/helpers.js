@@ -5,13 +5,13 @@ const typeWrapper = function(thing, type) {
   return thing;
 };
 
-const qh = {};
+const H = {};
 const typeDictionary = {
   'string': 'VARCHAR',
   'number': 'INT'
 };
 
-qh.createInsertQuery = function (tableName, schema, objToInsert) {
+H.createInsertQuery = function (tableName, schema, objToInsert) {
   let query = `insert into ${tableName}`;
   let columns = '('.concat(_
     .reduce(Object.keys(schema), (columns, val) => `${columns}, ${val}`), '')
@@ -30,7 +30,7 @@ qh.createInsertQuery = function (tableName, schema, objToInsert) {
   return `${query} ${columns} ${values}`;
 };
 
-qh.createUpdateQuery = function(tableName, schema, updateObj, id) {
+H.createUpdateQuery = function(tableName, schema, updateObj, id) {
   let query = `update ${tableName} set`;
   let changes = _.reduce(updateObj, (columnChanges, val, key) => {
     return `${columnChanges} ${key} = ${typeWrapper(val, schema[val])},`;
@@ -38,14 +38,14 @@ qh.createUpdateQuery = function(tableName, schema, updateObj, id) {
   return `${query} ${changes};`;
 };
 
-qh.createSelectQuery = function(tableName, schema, findObj) {
+H.createSelectQuery = function(tableName, schema, findObj) {
   let query = `select * from ${tableName} where`;
   // console.log(`${query}`);
   console.log('select query!');
   return `${query} ${objectToWhereStatement(findObj, schema)}`;
 };
 
-qh.createMakeTableQuery = function(tableName, schema, options) {
+H.createMakeTableQuery = function(tableName, schema, options) {
   let query;
   if (options.ifNotExists) {
     query = `CREATE TABLE IF NOT EXISTS ${tableName} (`;
@@ -67,7 +67,7 @@ qh.createMakeTableQuery = function(tableName, schema, options) {
   return query;
 };
 
-qh.createAddColumnQuery = function(tableName, column) {
+H.createAddColumnQuery = function(tableName, column) {
   let query = `ALTER TABLE ${tableName} ADD COLUMN ${column.name} ${typeDictionary[column.type]} ${column.null || ''}`;
   if (column.default) {
     query += `DEFAULT ${typeWrapper(column.default, column.type)}`;
@@ -75,14 +75,14 @@ qh.createAddColumnQuery = function(tableName, column) {
   return query;
 };
 
-qh.createDeleteQuery = function(tableName, schema, deleteObj) {
+H.createDeleteQuery = function(tableName, schema, deleteObj) {
   console.log(deleteObj);
   let query = `delete from ${this.tableName} where`;
   return `${query} ${objectToWhereStatement(deleteObj, schema)}`;
 };
 
 
-export default qh;
+export default H;
 
 
 function objectToWhereStatement(obj, schema) {

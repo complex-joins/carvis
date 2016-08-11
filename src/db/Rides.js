@@ -1,19 +1,10 @@
-import {db} from './db';
+import db from './db';
 
-const ridesSchema = {
-  userId: 'number',
-  date: 'string',
-  chosenRide: 'string',
-  uberCost: 'string',
-  uberTimeEstimate: 'string',
-  lyftCost: 'string',
-  lyftTimeEstimate: 'string'
-};
-
-
-db.createTableIfNotExists('rides', ridesSchema)
-.then(() =>
-db.end());
+knex.schema.createTable('users', function (table) {
+  table.increments();
+  table.string('name');
+  table.timestamps();
+})
 
 const Ride = db.model('rides', ridesSchema);
 
