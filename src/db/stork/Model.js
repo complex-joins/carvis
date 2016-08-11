@@ -9,6 +9,10 @@ class Model {
     return this.db.select().from(this.table);
   }
 
+  findById(id) {
+    return this.db.select().from(this.table).where({id: id});
+  }
+  
   find(obj) {
     return this.db.select().from(this.table).where(obj);
   }

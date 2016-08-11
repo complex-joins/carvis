@@ -1,4 +1,5 @@
 import Model from './Model';
+import UserModel from './UserModel'
 
 export default class DatabaseInstance {
   constructor(configObj, client) {

@@ -1,7 +1,8 @@
 var lyftHelper = require('./../utils/lyft-helper.js');
 var uberHelper = require('./../utils/uber-helper.js');
+import User from '../../db/User';
 
-export default function(app) { // LYFT 2FA - first call sends SMS to user
+export default function(app, passport) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
     let phoneNumber = req.body.phoneNumber;
     console.log('phone number is ', phoneNumber);
@@ -27,9 +28,10 @@ export default function(app) { // LYFT 2FA - first call sends SMS to user
 
   app.post('/auth/signup', (req, res) => {
     // Create user creds, walk thrme through setting up alexa, lyft, etc
+    User.create(req.body)
+      .then((user) => res.redirect('/'));
   });
 
-  app.post('/auth/login', (req, res) => {
-    // Basic auth
-  });
+  app.post('/auth/login',
+  passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 }

@@ -4,16 +4,16 @@ import authRoutes from './routes/authRoutes';
 import userDataRoutes from './routes/userDataRoutes';
 import staticFileRoutes from './routes/staticFileRoutes';
 import apiRoutes from './routes/apiRoutes';
+import passport from 'passport';
 
 const app = express();
 
-configureServer(app);
+configureServer(app, passport);
 
 // Set up routes
-staticFileRoutes(app);
-apiRoutes(app);
-userDataRoutes(app);
-authRoutes(app);
+staticFileRoutes(app, passport);
+apiRoutes(app, passport);
+authRoutes(app), passport);
 
 
 app.listen(PORT, () => console.log('listening on port', PORT));
