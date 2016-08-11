@@ -12,7 +12,7 @@ const resetDb = function *() {
       user.increments('id').primary();
 
       // LOCAL ACCOUNT
-      user.string('username', 100).unique();
+      user.string('email', 100).unique();
       user.string('password', 100);
 
       // LYFT INFO
@@ -27,6 +27,8 @@ const resetDb = function *() {
       // HOME LOCATION
       user.string('homeLatitude', 100);
       user.string('homeLongitude', 100);
+      user.string('homeAddress', 100);
+
       user.timestamps();
     });
     console.log('created new users table');
