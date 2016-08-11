@@ -7,8 +7,6 @@ var login = function (username, password) {
   var body = uberMethods.login.body(username, password);
   var headers = uberMethods.login.headers();
 
-  console.log('PATH', path, 'BODY', body, 'HEADERS', headers);
-
   fetch(path, {
       method: 'POST',
       headers: headers,
@@ -19,7 +17,6 @@ var login = function (username, password) {
     })
     .then(function (data) {
       // DB post all data --
-      console.log("SUCCESS UBER LOGIN-----", data);
       var response = uberMethods.login.responseMethod(data);
       // response.email for DB && response.token for subsequent calls.
     })
@@ -47,7 +44,7 @@ var login = function (username, password) {
 //
 //       var time = Math.random() * 4 + 1; // random time 1-5 seconds.
 //       setTimeout(function () {
-//         return confirmPickup(response.priceToken, response.priceId, response.paymentProfile, destination, origin); // TODO: destination
+//         return confirmPickup(response.priceToken, response.priceId, response.paymentProfile, destination, origin); 
 //       }, time);
 //
 //     })
