@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build",
     "build:client": "node ./tools/scripts/prod-client.js",
     "start:dev": "webpack -w & npm run build:server -- -w & nodemon -L ./dist/server/index.js",
     "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2,es2016 --copy-files",
