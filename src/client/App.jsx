@@ -1,10 +1,18 @@
 import React from 'react';
-import Order from './order-components/Order';
+import Order from './app-order-components/Order';
+import axios from 'axios';
+
 export default class App extends React.Component {
+  constructor() {
+    this.state = {
+      currentUser: false
+    };
+  }
+
   render() {
     return (
       <div className="fullHeight">
-        <Order />
+        {this.props.children}
       </div>
       );
   }

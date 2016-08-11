@@ -1,6 +1,7 @@
 var lyftHelper = require('./../utils/lyft-helper.js');
 var uberHelper = require('./../utils/uber-helper.js');
 import User from '../../db/User';
+import isAuthenticated from '../server-configuration/isAuthenticated';
 
 export default function(app, passport) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
@@ -26,15 +27,25 @@ export default function(app, passport) { // LYFT 2FA - first call sends SMS to u
     res.json({message: 'on its way'});
   });
 
-  app.post('/auth/signup', (req, res) => {
-    // Create user creds, walk thrme through setting up alexa, lyft, etc
-    User.create(req.body)
-      .then((user) => res.json({nextLocation: '/dashboard'}))
-      .catch((err) => res.json({nextLocation: '/auth'}));
+  app.post('/auth/signup', passport.authenticate('local'), (req, res) => {
+    res.json({message: 'complete'});
   });
 
   app.post('/auth/login',
   passport.authenticate('local'), (req, res) => {
     res.json({nextLocation: ''});
+  });
+
+  app.get('/auth/checkLogin', isAuthenticated, (req, res) => {
+    console.log('user', req.user);
+    console.log('req', req);
+    // TODO hardcoded dev user id
+    res.json({userid: 1, authenticated: true});
+  });
+
+
+  app.get('/auth/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
   });
 }

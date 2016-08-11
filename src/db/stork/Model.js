@@ -12,9 +12,22 @@ class Model {
   findById(id) {
     return this.db.select().from(this.table).where({id: id});
   }
-  
+
   find(obj) {
     return this.db.select().from(this.table).where(obj);
+  }
+
+  findOrCreate(obj) {
+    // finds only on first val
+    let firstProperty = Object.keys(obj)[0];
+    this.db.select().from(this.table).where({[firstProperty]: obj[firstProperty]})
+    .then((foundObj) => {
+      if (!foundObj) {
+        return this.create(obj);
+      } else {
+        return foundObj;
+      }
+    });
   }
 
   create(obj) {
@@ -22,7 +35,7 @@ class Model {
   }
 
   save(obj) {
-    return this.create(obj).returning(...Object.keys(obj));
+    return this.create(obj);
   }
 
   update(criteriaObj, updateObj) {

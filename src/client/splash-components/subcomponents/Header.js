@@ -12,27 +12,13 @@ export default (props) => (
             <p className="intro-text">Find a car, save money</p>
             {/* hard coding this route for now. Should be /auth then check if auth */}
             <div className="row">
-              <div className="col-sm-2"></div>
-              <div className="col-sm-3">
-                <Link to="auth">
-                  <div href="#" className="btn btn-default btn-lg page-scroll">
-                    Get Started
-                    <i className="fa fa-sign-in padLeft" aria-hidden="true"></i>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-sm-2"></div>
-              <div className="col-sm-3">
-                <a href="#about" className="btn btn-default btn-lg page-scroll">
-                  Learn More
+              <div className="col-sm-3 col-sm-offset-5">
+                <a href="#signin" className="btn btn-default btn-lg page-scroll">
+                  Get Started
                   <i className="fa fa-angle-double-down animated padLeft"></i>
                 </a>
               </div>
-              <div className="col-sm-2"></div>
             </div>
-            <Link to="/app">
-              <button className="btn btn-danger">CHEAT MODE</button>
-            </Link>
           </div>
         </div>
       </div>

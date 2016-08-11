@@ -3,11 +3,11 @@ import LyftSignInButton from './LyftSignInButton';
 import UberSignInButton from './UberSignInButton';
 
 export default (props) => (
-    <div className="container text-center jarvisbg fullHeight">
-      <h1>Sign In</h1>
+    <div id="signin" className="container content-section text-center jarvisbg fullHeight">
+      <h2>Sign In</h2>
       <ul className="list-inline banner-social-buttons">
-        <LyftSignInButton />
-        <UberSignInButton />
+        <LyftSignInButton onClick={this.props.checkAuth}/>
+        <UberSignInButton onClick={this.props.checkAuth}/>
       </ul>
     </div>
 );

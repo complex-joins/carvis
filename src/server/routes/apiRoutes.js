@@ -1,5 +1,6 @@
-import User from '../../db/stork/User';
-import Ride from '../../db/stork/Ride';
+import User from '../../db/User';
+import Ride from '../../db/Ride';
+import isAuthenticated from '../server-configuration/isAuthenticated';
 
 export default function(app, passport) {
   // get all user data for a particular user

@@ -6,14 +6,11 @@ import apiRoutes from './routes/apiRoutes';
 import passport from 'passport';
 
 const app = express();
-
-//  sessions, passport, auth middleware
+// Sessions, passport, auth middleware
 configureServer(app, passport);
-
 // Set up routes
 staticFileRoutes(app, passport);
 apiRoutes(app, passport);
 authRoutes(app, passport);
-
 
 app.listen(PORT, () => console.log('listening on port', PORT));

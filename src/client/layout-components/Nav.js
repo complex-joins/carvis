@@ -29,6 +29,16 @@ function determineNavButtons(props) {
           <a href="#page-top"></a>
         </li>
         <li>
+          <Link to="/1/order">
+            <button className="btn btn-danger">USER DASHBOARD</button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/1/dasboard">
+            <button className="btn btn-danger">ORDER DASHBOARD</button>
+          </Link>
+        </li>
+        <li>
           <a className="page-scroll" href="#about">About</a>
         </li>
         <li>
