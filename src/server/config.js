@@ -3,7 +3,9 @@ import path from 'path';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-
+import passport from 'passport';
+import User from '../db/User';
+import {Strategy as LocalStrategy} from 'passport-local');
 
 export const PORT = process.env.PORT || 8000;
 
@@ -19,4 +21,19 @@ export const configureServer = function(app) {
     resave: true,
     saveUninitialized: true
   }));
+
+  passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.find({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      console.log('returned user, user');
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!User.isValidPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
 };
