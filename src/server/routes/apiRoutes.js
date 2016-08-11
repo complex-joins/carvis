@@ -1,7 +1,7 @@
 import User from '../../db/stork/User';
 import Ride from '../../db/stork/Ride';
 
-export default function(app) {
+export default function(app, passport) {
   // get all user data for a particular user
   // TODO only let the user with that ID find users (middleware);
   app.get('/users/:userid', (req, res) => {

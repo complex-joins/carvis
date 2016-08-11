@@ -29,9 +29,12 @@ export default function(app, passport) { // LYFT 2FA - first call sends SMS to u
   app.post('/auth/signup', (req, res) => {
     // Create user creds, walk thrme through setting up alexa, lyft, etc
     User.create(req.body)
-      .then((user) => res.redirect('/'));
+      .then((user) => res.json({nextLocation: '/dashboard'}))
+      .catch((err) => res.json({nextLocation: '/auth'}));
   });
 
   app.post('/auth/login',
-  passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+  passport.authenticate('local'), (req, res) => {
+    res.json({nextLocation: ''});
+  });
 }

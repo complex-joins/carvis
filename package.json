@@ -13,7 +13,6 @@
     "start": "npm run build; node ./dist/server/index.js"
   },
   "eslintConfig": {
-    "extends": "./tools/eslint.js"
   },
   "repository": {
     "type": "git",

@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Splash from './splash-components/Splash';
-import Auth from './auth-components/Auth';
-import {LyftAuth, UberAuth, Login} from './auth-components/AuthComponents';
 import MainLayout from './layout-components/MainLayout';
 import NoMatch from './layout-components/NoMatch';
-import UserProfile from './profile-components/UserProfile';
+import UserDashboard from './profile-components/UserDashboard';
+import Order from './order-components/Order';
+import UberAuth from './auth-components/UberAuth/UberAuth';
+import LyftAuth from './auth-components/LyftAuth/LyftAuth';
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
@@ -17,13 +18,12 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={MainLayout}>
       <IndexRoute component={Splash}></IndexRoute>
-      <Route path="app" component={App}></Route>
-      <Route path="auth" component={Auth}>
-        <Route path="login" component={Login}></Route>
+      <Route path="app" component={App}>
+        <Route path="lyftAuth" component={LyftAuth}></Route>
+        <Route path="uberAuth" component={UberAuth}></Route>
+        <Route path=":userid/dashboard" component={UserDashboard}></Route>
+        <Route path=":userid/order" component={Order}></Route>
       </Route>
-      <Route path="lyftAuth" component={LyftAuth}></Route>
-      <Route path="uberAuth" component={UberAuth}></Route>
-      <Route path=":userid/profile" component={UserProfile}></Route>
     </Route>
     <Route path="*" component={NoMatch}></Route>
   </Router>

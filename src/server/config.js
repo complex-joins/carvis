@@ -3,7 +3,6 @@ import path from 'path';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import passport from 'passport';
 import User from '../db/User';
 import {Strategy as LocalStrategy} from 'passport-local';
 
@@ -44,5 +43,6 @@ export const configureServer = function(app, passport) {
       }
       return done(null, user);
     });
-  }
+  }));
+
 };
