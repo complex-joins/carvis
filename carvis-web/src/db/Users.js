@@ -10,14 +10,16 @@ const userSchema = {
 // .then(() =>
 // db.end());
 
-const User = db.model('users', userSchema, {hash: true});
+const User = db.model('users', userSchema, { hash: true });
 
 // User.save({username: 'alex', password: 'pass'});
-User.hasMany(Ride).through('userId');
+User.hasMany(Ride)
+  .through('userId');
 
-User.select({username: 'alex'}).then((user) => {
-  console.log(user.show(Ride));
-});
+User.select({ username: 'alex' })
+  .then((user) => {
+    console.log(user.show(Ride));
+  });
 
 
 // .show(Rides);

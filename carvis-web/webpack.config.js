@@ -21,8 +21,8 @@ module.exports = {
     moduleTemplates: ['*-loader']
   },
   module: {
-    loaders: [
-      { test: /\.(html)$/,
+    loaders: [{
+        test: /\.(html)$/,
         loader: 'file?name=[name].[ext]'
       },
       {
