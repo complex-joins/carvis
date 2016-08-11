@@ -1,3 +1,36 @@
+/* ======== REDIS SCHEMA =====
+places:
+---------
+hash name: place (string)
+keys:
+---
+userId:lat : int
+userId:lng : int
+userId:routable : string
+
+-- otherwise do getOwnPropertyNames to check another userId:data
+// NOTE: or is there a better way?
+
+===============================
+userdata:
+---------
+hash name: userId (alexa userId)
+keys:
+---
+lyftToken: string
+lyftPaymentInfo: string
+uberToken: string
+originlat: int
+originlng: int
+originRoutable: string
+phoneNumber: int
+...
+
+===============================
+
+*/
+
+
 var bluebird = require("bluebird");
 bluebird.promisifyAll(require('redis')); // promisified versions have 'Async' postfix - ie. client.getAsync() and client.hgetallAsync()
 var client = redis.createClient();

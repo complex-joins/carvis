@@ -1,7 +1,8 @@
 var fetch = require('node-fetch');
 var btoa = require('btoa');
 var lyftMethods = require('./lyftPrivateMethods');
-var auth = lyftMethods.appConfig.appId + ':' + lyftMethods.appConfig.appSecret;
+var auth = require('./../../../secret/config.js')
+  .LYFT_USER_ID;
 var baseURL = 'https://api.lyft.com/v1/'; // on which path is added.
 
 // TODO: database posts in each response -- with generic key naming.
