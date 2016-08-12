@@ -1,20 +1,20 @@
 /* ======== REDIS SCHEMA =====
 places:
 ---------
-hash name: place (string)
-keys:
----
-userId:lat : int
-userId:lng : int
-userId:routable : string
+-- > nested datastructures not possible so solution:
+hash name city && key: query, value: integer ID
+++ SET name integer ID && content: objects of locations.
 
--- otherwise do getOwnPropertyNames to check another userId:data
-// NOTE: or is there a better way?
+location object: {
+  lat : int
+  lng : int
+  routable : string
+}
 
 ===============================
 userdata:
 ---------
-hash name: userId (alexa userId)
+hash name: user:<user id> (alexa userId)
 keys:
 ---
 lyftToken: string

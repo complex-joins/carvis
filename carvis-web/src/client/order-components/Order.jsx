@@ -27,11 +27,11 @@ export default class Order extends React.Component {
           <form className="container">
             <div className="form-group">
               From:
-              <input type="text blackTextInput"/>
+              <input type="text" className="blackTextInput"/>
             </div>
             <div className="form-group">
               To:
-              <input type="text blackTextInput"/>
+              <input type="text" className="blackTextInput"/>
             </div>
           </form>
         </div>
