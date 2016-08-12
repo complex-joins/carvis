@@ -4,10 +4,7 @@ import axios from 'axios';
 export default class UberAuth extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      password: '',
-    };
+
   }
 
   render() {
@@ -18,7 +15,7 @@ export default class UberAuth extends React.Component {
           <img className="carIcon" src="../img/ubericon.png" alt=""/>
           <br/>
         </div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form action="/auth/uberAuth" method="POST">
           <div className="form-group">
             <div className="row">
               <div className="col-xs-3"></div>
@@ -26,7 +23,7 @@ export default class UberAuth extends React.Component {
                 <label htmlFor="example-tel-input" className=" col-form-label">Uber Account Email</label>
               </div>
               <div className="col-xs-3">
-                <input name="email" onChange={this.handleFormChange.bind(this)} className="form-control blackTextInput" type="email" id="email-input"/>
+                <input name="email" className="form-control blackTextInput" type="email" id="email-input"/>
               </div>
             </div>
           </div>
@@ -34,10 +31,10 @@ export default class UberAuth extends React.Component {
             <div className="row">
               <div className="col-xs-3"></div>
               <div className="col-xs-2">
-                <label htmlFor="example-tel-input" className=" col-form-label">Uber Account Password</label>
+                <label htmlFor="example-tel-input" className="col-form-label">Uber Account Password</label>
               </div>
               <div className="col-xs-3">
-                <input name="password" onChange={this.handleFormChange.bind(this)} className="form-control blackTextInput" type="password" id="email-input"/>
+                <input name="password" className="form-control blackTextInput" type="password" id="email-input"/>
               </div>
             </div>
           </div>
@@ -46,18 +43,27 @@ export default class UberAuth extends React.Component {
       </div>
     );
   }
-  handleFormChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
 
-//
-  handleSubmit(e) {
-    e.preventDefault();
-    axios.post('/auth/uberAuth', this.state)
-    .then((res) => {
-      console.log(res);
-    });
-  }
 }
+
+
+// this.state = {
+//   email: '',
+//   password: '',
+// };
+
+// Async Submit
+// handleFormChange(e) {
+//   this.setState({
+//     [e.target.name]: e.target.value
+//   });
+// }
+
+// handleSubmit(e) {
+//   e.preventDefault();
+//   axios.post('/auth/uberAuth', this.state)
+//   .then((res) => {
+//     console.log(res);
+//   });
+// }
+// onSubmit={this.handleSubmit.bind(this)}

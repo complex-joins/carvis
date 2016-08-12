@@ -1,8 +1,8 @@
 const path = require('path');
 
-const nodeModulesPath = path.join(__dirname, '/../node_modules');
-const appSrcPath = path.join(__dirname, '/../src/client/index.js');
-const appDistPath = path.join(__dirname, '/../dist/client/');
+const nodeModulesPath = path.join(__dirname, '/../../node_modules');
+const appSrcPath = path.join(__dirname, '/../../src/client/App/AppRouter.js');
+const appDistPath = path.join(__dirname, '/../../dist/client/');
 
 module.exports = {
   devtool: 'eval',
@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: appDistPath,
     pathinfo: true,
-    filename: 'bundle.js',
+    filename: 'app.bundle.js',
     publicPath: '/'
   },
   resolve: {
@@ -22,7 +22,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.(html)$/,
+      {
+        test: /\.(html)$/,
         loader: 'file?name=[name].[ext]'
       },
       {

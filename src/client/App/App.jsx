@@ -1,9 +1,9 @@
 import React from 'react';
-import Order from './app-order-components/Order';
-import axios from 'axios';
+import Order from './order-components/Order';
 
 export default class App extends React.Component {
-  constructor() {
+  constructor(props) {
+    super(props);
     this.state = {
       currentUser: false
     };

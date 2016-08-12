@@ -11,10 +11,6 @@ export default function(app, passport) {
   });
 
   // create a new user
-  app.post('/users', (req, res) => {
-    User.create(req.body)
-      .then((user) => res.json(user));
-  });
 
   // get all rides for a particular user
   app.get('/rides/:userid', (req, res) => {

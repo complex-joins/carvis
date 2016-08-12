@@ -47,22 +47,6 @@ export default class Order extends React.Component {
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   let { markers } = this.state;
-    //   markers = update(markers, {
-    //     $push: [
-    //       {
-    //         position: {
-    //           lat: 25.99,
-    //           lng: 122.9,
-    //         },
-    //         defaultAnimation: 2,
-    //         key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
-    //       },
-    //     ],
-    //   });
-    //   this.setState({ markers });
-    // }, 2000);
   }
 
 

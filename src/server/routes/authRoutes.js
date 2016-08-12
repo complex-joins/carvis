@@ -17,18 +17,18 @@ export default function(app, passport) { // LYFT 2FA - first call sends SMS to u
     console.log('got code', lyftCode);
     lyftHelper.lyftPhoneCodeAuth(lyftCode, phoneNumber);
     // NOTE: need to pass session and userLocation from DB
-    res.json({message: 'yes!'});
+    res.redirect('/');
   });
 
   app.post('/auth/uberAuth', (req, res) => { // user|pw Uber login
     let uberObj = req.body;
     uberHelper.login(uberObj.email, uberObj.password);
     console.log('got uber obj', uberObj);
-    res.json({message: 'on its way'});
+    res.redirect('/');
   });
 
   app.post('/auth/signup', passport.authenticate('local'), (req, res) => {
-    res.json({message: 'complete'});
+    
   });
 
   app.post('/auth/login',

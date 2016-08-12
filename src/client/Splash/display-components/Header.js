@@ -10,7 +10,6 @@ export default (props) => (
           <div className="col-md-8 col-md-offset-2">
             <h1 className="brand-heading">Carvis</h1>
             <p className="intro-text">Find a car, save money</p>
-            {/* hard coding this route for now. Should be /auth then check if auth */}
             <div className="row">
               <div className="col-sm-3 col-sm-offset-5">
                 <a href="#signin" className="btn btn-default btn-lg page-scroll">

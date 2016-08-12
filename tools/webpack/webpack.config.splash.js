@@ -1,21 +1,16 @@
 const path = require('path');
-const webpack = require('webpack');
 
-const nodeModulesPath = path.join(__dirname, '/../node_modules');
-const appSrcPath = path.join(__dirname, '/../src/client/index.js');
-const appDistPath = path.join(__dirname, '/../dist/client/');
+const nodeModulesPath = path.join(__dirname, '/../../node_modules');
+const appSrcPath = path.join(__dirname, '/../../src/client/Splash/SplashRouter.js');
+const appDistPath = path.join(__dirname, '/../../dist/client/');
 
 module.exports = {
   devtool: 'eval',
-  entry: [
-    require.resolve('webpack-dev-server/client') + '?/',
-    require.resolve('webpack/hot/dev-server'),
-    appSrcPath
-  ],
+  entry: appSrcPath,
   output: {
     path: appDistPath,
     pathinfo: true,
-    filename: 'bundle.js',
+    filename: 'splash.bundle.js',
     publicPath: '/'
   },
   resolve: {
@@ -40,12 +35,21 @@ module.exports = {
         loader: 'style!css'
       },
       {
+        test: /\.min\.css$/,
+        include: [appSrcPath, nodeModulesPath],
+        loader: 'style!css'
+      },
+      {
         test: /\.less$/,
         loader: 'style!css!less'
       },
       {
-        test: /\.jsx?/,
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         loader: 'babel',
+        query: {
+          presets: ['es2015', 'react']
+        }
       },
       {
         test: /\.scss$/,
@@ -53,7 +57,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ]
+  eslint: {
+    configFile: path.join(__dirname, 'eslint.js'),
+    useEslintrc: false
+  },
 };
