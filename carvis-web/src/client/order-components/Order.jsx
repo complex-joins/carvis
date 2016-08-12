@@ -71,7 +71,7 @@ export default class Order extends React.Component {
     // make call to order car using from and to locations
   }
 
-  handleMapClick(event) {
+  handleMapClick(event) { // NOTE: are we adding a market for every click?!
     let {markers} = this.state;
     markers = update(markers, {
       $push: [
