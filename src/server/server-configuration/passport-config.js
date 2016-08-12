@@ -1,5 +1,7 @@
 import {User} from '../../db/User';
 import {Strategy as LocalStrategy} from 'passport-local';
+import CARVIS_API from '../../../secret/config';
+import axios from 'axios';
 
 export default function(app, passport) {
   app.use(passport.initialize());
@@ -18,7 +20,7 @@ export default function(app, passport) {
   passport.use('local', new LocalStrategy(
     function(username, password, done) {
       console.log('using local strat');
-      User.findOrCreate({ username: username, password: password })
+      axios.post(`${CARVIS_API}/auth/user`, {username: username, password: password})
       .then((user) => {
         console.log('user in db', user);
         if (!User.isValidPassword(password, user.id)) {

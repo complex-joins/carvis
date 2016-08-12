@@ -1,6 +1,5 @@
 var lyftHelper = require('./../utils/lyft-helper.js');
 var uberHelper = require('./../utils/uber-helper.js');
-import User from '../../db/User';
 import isAuthenticated from '../server-configuration/isAuthenticated';
 
 export default function(app, passport) { // LYFT 2FA - first call sends SMS to user
