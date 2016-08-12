@@ -19,6 +19,7 @@ class Model {
 
   findOrCreate(obj) {
     // finds only on first val
+    console.log('called find or create');
     let firstProperty = Object.keys(obj)[0];
     this.db.select().from(this.table).where({[firstProperty]: obj[firstProperty]})
     .then((foundObj) => {

@@ -9,8 +9,9 @@ import UserDashboard from './dashboard-components/UserDashboard';
 import Order from './order-components/Order';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
-requireAll(require.context('../static/', true, /^\.\/.*/));
 function requireAll(r) { r.keys().forEach(r); }
+requireAll(require.context('../static/app', true, /^\.\/.*/));
+requireAll(require.context('../static/shared', true, /^\.\/.*/));
 
 ReactDOM.render(
   <Router history={browserHistory}>

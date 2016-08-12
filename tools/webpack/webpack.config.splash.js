@@ -27,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-        loader: 'file?name=[path][name].[ext]&context=./src/client/static',
+        loader: 'file?name=[path][name].[ext]&context=../../src/client/static',
       },
       {
         test: /\.css$/,

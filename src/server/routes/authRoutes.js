@@ -27,9 +27,8 @@ export default function(app, passport) { // LYFT 2FA - first call sends SMS to u
     res.redirect('/');
   });
 
-  app.post('/auth/signup', passport.authenticate('local'), (req, res) => {
-    
-  });
+  app.post('/auth/signup', passport.authenticate('local',
+    { successRedirect: '/', failureRedirect: '/' }));
 
   app.post('/auth/login',
   passport.authenticate('local'), (req, res) => {
@@ -42,7 +41,6 @@ export default function(app, passport) { // LYFT 2FA - first call sends SMS to u
     // TODO hardcoded dev user id
     res.json({userid: 1, authenticated: true});
   });
-
 
   app.get('/auth/logout', (req, res) => {
     req.logout();

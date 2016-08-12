@@ -11,7 +11,7 @@ export default (props) => (
             <h1 className="brand-heading">Carvis</h1>
             <p className="intro-text">Find a car, save money</p>
             <div className="row">
-              <div className="col-sm-3 col-sm-offset-5">
+              <div className="col-sm-3 col-sm-offset-4">
                 <a href="#signin" className="btn btn-default btn-lg page-scroll">
                   Get Started
                   <i className="fa fa-angle-double-down animated padLeft"></i>
