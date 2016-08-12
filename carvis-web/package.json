@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "axios": "^0.13.1",
+    "babel-eslint": "^6.1.2",
     "babel-preset-react": "^6.11.1",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.1",
@@ -71,6 +72,7 @@
     "react-dom": "^15.3.0",
     "react-google-maps": "^4.11.0",
     "react-router": "^2.6.1",
+    "redis": "^2.6.2",
     "style-loader": "^0.13.1",
     "twilio": "^2.9.2",
     "webpack": "^1.13.1"

@@ -1,7 +1,7 @@
-export default function(app) {
+export default function (app) {
   app.get('/:userid/profile', (req, res) => {
     // get basic profile info
-      // home location, etc
+    // home location, etc
   });
 
   app.post('/:userid/profile', (req, res) => {
