@@ -3,6 +3,10 @@ var btoa = require('btoa');
 var lyftMethods = require('./lyftPrivateMethods');
 var auth = require('./../../../secret/config.js')
   .LYFT_USER_ID;
+var APItoken = require('./../../../secret/config.js')
+  .CARVIS_API_KEY;
+var APIserver = require('./../../../secret/config.js')
+  .CARVIS_API;
 var baseURL = 'https://api.lyft.com/v1/'; // on which path is added.
 
 // TODO: database posts in each response -- with generic key naming.
@@ -86,12 +90,13 @@ var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, user
       var response = lyftMethods.phoneCodeAuth.responseMethod(data, userId);
 
       // POST THE USER DATA TO OUR RELATIONAL DATABASE
-      var dbpostURL = 'http://54.183.205.82/users/updateOrCreate';
+      var dbpostURL = 'http://' + APIserver + '/users/updateOrCreate';
 
       fetch(dbpostURL, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token': APItoken
           },
           body: JSON.stringify(response)
         })
@@ -156,14 +161,15 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
     .then(function (data) {
       console.log('successful requestRide post LYFT', data);
       var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
-      var dbpostURL = 'http://54.183.205.82/rides/' + rideId;
+      var dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
 
       // once we receive the request-ride confirmation response
       // we update the DB record for that ride with eta and vendorRideId
       fetch(dbpostURL, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token': APItoken
           },
           body: JSON.stringify(response)
         })
