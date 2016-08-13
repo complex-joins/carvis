@@ -61,6 +61,8 @@ var lyftPhoneAuth = function (phoneNumberString) {
 // NOTE: userLocation should come from the user client // Alexa.
 var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, userId) {
 
+  userId = userId || 'noAlexa';
+
   userLocation = userLocation || null;
 
   var url = lyftMethods.phoneCodeAuth.path;
@@ -78,12 +80,13 @@ var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, user
       return res.json();
     })
     .then(function (data) {
-      console.log('successful phoneCodeAuth post LYFT', data);
+      // console.log('successful phoneCodeAuth post LYFT', data);
 
       // the responseMethod function returns an object with the parameters we need for subsequent operations only, and in a key-name generalised manner.
       var response = lyftMethods.phoneCodeAuth.responseMethod(data, userId);
-      var dbpostURL = 'https://54.183.205.82/users/update/' + userId;
-      // TODO: make updateOrCreate()
+      var dbpostURL = 'http://54.183.205.82/users/updateOrCreate';
+
+      console.log('response pre DB post', response);
 
       // POST THE USER DATA TO OUR RELATIONAL DATABASE
       fetch(dbpostURL, {
@@ -158,7 +161,7 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
       console.log('successful requestRide post LYFT', data);
 
       var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
-      var dbpostURL = 'https://54.183.205.82/rides/' + rideId;
+      var dbpostURL = 'http://54.183.205.82/rides/' + rideId;
 
       // once we receive the request-ride confirmation response
       // we update the DB record for that ride with eta and vendorRideId
