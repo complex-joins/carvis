@@ -82,9 +82,8 @@ var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, user
 
       // the responseMethod function returns an object with the parameters we need for subsequent operations only, and in a key-name generalised manner.
       var response = lyftMethods.phoneCodeAuth.responseMethod(data, userId);
-
-      // TODO: refactor to createOrUpdate DB call.
-      var dbpostURL = '/users/update/:' + userId; // update user call for now
+      var dbpostURL = 'https://54.183.205.82/users/update/:' + userId;
+      // TODO: make updateOrCreate()
 
       // POST THE USER DATA TO OUR RELATIONAL DATABASE
       fetch(dbpostURL, {
@@ -126,13 +125,13 @@ var getCost = function (token, origin, destination, paymentInfo, partySize, ride
       console.log('successful getCost post LYFT', data);
 
       var response = lyftMethods.getCost.responseMethod(data);
-      // NOTE: alexa could speak response.tripDuration
 
-      var time = Math.random() * 4 + 1; // random time 1-5 seconds.
+      // random time 1-5 seconds - to simulate more 'natural' patterns
+      var time = Math.random() * 4 + 1;
       setTimeout(function () {
         // NOTE: API server needs to pass these parameters to the function.
         // token, paymentInfo come from DB, userId from Alexa, ...
-        return requestRide(token, response.costToken, destination, origin, paymentInfo, partySize, rideId);
+        return requestRide(token, response.costToken, destination, origin, paymentInfo, partySize, rideId, response.tripDuration);
       }, time);
 
     })
@@ -142,7 +141,7 @@ var getCost = function (token, origin, destination, paymentInfo, partySize, ride
 
 };
 
-var requestRide = function (token, costToken, destination, origin, paymentInfo, partySize, rideId) {
+var requestRide = function (token, costToken, destination, origin, paymentInfo, partySize, rideId, tripDuration) {
   var url = baseURL + lyftMethods.requestRide.path;
   var headers = lyftMethods.requestRide.headers(token, );
   var body = lyftMethods.requestRide.body(costToken, destination, origin, paymentInfo, partySize);
@@ -158,21 +157,13 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
     .then(function (data) {
       console.log('successful requestRide post LYFT', data);
 
-      var response = lyftMethods.requestRide.responseMethod(data, userId);
+      var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
+      var dbpostURL = 'https://54.183.205.82/rides/' + rideId;
 
-      // update ride call by rideId
-      var dbpostURL = '';
-
-      /* response includes:
-      rideId: rideId, // our unique record ID in the database.
-      lyftRideStatus: // status of the ride.
-      lyftRideId: // unique identifier, used for cancel etc.
-      lyftRideType: // ie. LINE etc.
-      eta: // time to arrival - can be communicated to user.
-      */
-
+      // once we receive the request-ride confirmation response
+      // we update the DB record for that ride with eta and vendorRideId
       fetch(dbpostURL, {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
