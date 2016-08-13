@@ -84,11 +84,10 @@ var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, user
 
       // the responseMethod function returns an object with the parameters we need for subsequent operations only, and in a key-name generalised manner.
       var response = lyftMethods.phoneCodeAuth.responseMethod(data, userId);
-      var dbpostURL = 'http://54.183.205.82/users/updateOrCreate';
-
-      console.log('response pre DB post', response);
 
       // POST THE USER DATA TO OUR RELATIONAL DATABASE
+      var dbpostURL = 'http://54.183.205.82/users/updateOrCreate';
+
       fetch(dbpostURL, {
           method: 'POST',
           headers: {
@@ -111,6 +110,7 @@ var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, user
       console.log('error post of phoneCodeAuth LYFT', err);
     });
 };
+
 // origin {startLat, startLng, startAddress}
 // destination {endLat, endLng, endAddress}
 var getCost = function (token, origin, destination, paymentInfo, partySize, rideId) {
