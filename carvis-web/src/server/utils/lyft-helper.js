@@ -61,7 +61,7 @@ var lyftPhoneAuth = function (phoneNumberString) {
 // NOTE: userLocation should come from the user client // Alexa.
 var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, userId) {
 
-  userId = userId || 'noAlexa';
+  userId = userId || null;
 
   userLocation = userLocation || null;
 
@@ -126,17 +126,13 @@ var getCost = function (token, origin, destination, paymentInfo, partySize, ride
     })
     .then(function (data) {
       console.log('successful getCost post LYFT', data);
-
       var response = lyftMethods.getCost.responseMethod(data);
 
       // random time 1-5 seconds - to simulate more 'natural' patterns
       var time = Math.random() * 4 + 1;
       setTimeout(function () {
-        // NOTE: API server needs to pass these parameters to the function.
-        // token, paymentInfo come from DB, userId from Alexa, ...
         return requestRide(token, response.costToken, destination, origin, paymentInfo, partySize, rideId, response.tripDuration);
       }, time);
-
     })
     .catch(function (err) {
       console.log('error post of getCost LYFT', err);
@@ -159,7 +155,6 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
     })
     .then(function (data) {
       console.log('successful requestRide post LYFT', data);
-
       var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
       var dbpostURL = 'http://54.183.205.82/rides/' + rideId;
 
