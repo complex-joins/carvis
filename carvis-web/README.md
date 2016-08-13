@@ -4,26 +4,20 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+Built by @alexcstark, @cpruijsen, @daredia, @JasonArkens17 as our final project @hackreactor .
 
-## Table of Contents
+## Stack
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+Built using Node, Express, React, PostgreSQL with Redux, React-Router and Redis.
 
+Deployment: Docker, AWS EC2, AWS Lambda.
+Build tools: NPM scripting, Webpack, ESlint.
+Testing: TravisCI, Mocha, Chai, Karma.
 
-> Some usage instructions
+APIs: Uber, Lyft, Google Places, Twilio.
+Client side: web app and Amazon Alexa Skill.
 
-## Requirements
-
-## Development
+Tools used for reverse-engineering: Charles Proxy, APKtool, APK extractor, SSL Kill Switch 2, Cydia.
 
 ### Installing Dependencies
 
@@ -53,7 +47,6 @@ npm start
 ### Roadmap
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 
 ## Contributing
 
