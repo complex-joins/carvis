@@ -1,6 +1,10 @@
 var fetch = require('node-fetch');
 var uberMethods = require('./uberPrivateMethods');
-var baseURL = 'https://cn-sjc1.uber.com'; // https ?
+var baseURL = 'https://cn-sjc1.uber.com';
+var APItoken = require('./../../../secret/config.js')
+  .CARVIS_API_KEY;
+var APIserver = require('./../../../secret/config.js')
+  .CARVIS_API;
 
 var login = function (username, password) {
   var path = baseURL + uberMethods.login.path;
@@ -16,7 +20,6 @@ var login = function (username, password) {
       return res.json();
     })
     .then(function (data) {
-      // DB post all data --
       var response = uberMethods.login.responseMethod(data);
       // response.email for DB && response.token for subsequent calls.
     })
@@ -44,7 +47,7 @@ var login = function (username, password) {
 //
 //       var time = Math.random() * 4 + 1; // random time 1-5 seconds.
 //       setTimeout(function () {
-//         return confirmPickup(response.priceToken, response.priceId, response.paymentProfile, destination, origin); 
+//         return confirmPickup(response.priceToken, response.priceId, response.paymentProfile, destination, origin);
 //       }, time);
 //
 //     })
