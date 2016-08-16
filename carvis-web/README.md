@@ -30,6 +30,7 @@ If you're a member of the Complex-Joins team, update your secret config (create 
 ```sh
 npm run setup
 ```
+***These files contain the private/undocumented api endpoints uber and lyft’s apps use to communicate with their servers. You can find these yourself by reverse engineering their apps, or go through the approval flow to use their official api endpoints. Refer to the reverse engineering tools listed above.***
 
 ### Usage
 
