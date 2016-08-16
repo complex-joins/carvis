@@ -60,11 +60,9 @@ var lyftPhoneAuth = function (phoneNumberString) {
     });
 };
 
-// NOTE: userLocation should come from the user client // Alexa.
 var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, userId) {
 
-  userId = userId || null;
-
+  userId = userId || null; // alexaUserId
   userLocation = userLocation || null;
 
   var url = lyftMethods.phoneCodeAuth.path;
