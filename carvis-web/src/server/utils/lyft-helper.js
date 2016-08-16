@@ -235,11 +235,37 @@ var cancelRide = function (token, userLocation, rideId) {
     });
 };
 
+// NOTE: this only returns a URL -- sharing of URL should be done on response
+// we could use our twilio integration for this.
+var shareETA = function (rideId) {
+  var url = lyftMethods.shareETA.path;
+  var headers = lyftMethods.shareETA.headers(token);
+  var body = lyftMethods.shareETA.body(rideId);
+
+  fetch(url, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify(body)
+    })
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      var response = lyftMethods.shareETA.responseMethod(data);
+      // TODO: do something with data
+      console.log('response shareETA LYFT', response);
+    })
+    .catch(function (err) {
+      console.warn('error shareETA LYFT', err);
+    });
+};
+
 module.exports = {
   refreshBearerToken: refreshBearerToken,
   lyftPhoneAuth: lyftPhoneAuth,
   lyftPhoneCodeAuth: lyftPhoneCodeAuth,
   getCost: getCost,
   requestRide: requestRide,
-  cancelRide: cancelRide
+  cancelRide: cancelRide,
+  shareETA: shareETA
 };
