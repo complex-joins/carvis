@@ -43,16 +43,15 @@ npm run setup
 
 ### Usage
 
-Run the following command for hot building of front and back end
-```sh
-npm run start:dev
-```
+* `postinstall`: Life cycle hook that runs anytime you run `npm build`
+* `build:client`: Creates the webpack bundle.js
+* `start:dev`: Builds and starts dev server on port 8000
+* `build:server`: Builds server
+* `setup`: Copies down secret config file (Internal only, you must figure this out yourself)
+* `test`: Runs Mocha tests
+* `build`: Builds server and client
+* `start`: Builds and then starts server 
 
-
-Run the following command for a static build
-```sh
-npm start
-```
 
 ###Moving Forward
 
