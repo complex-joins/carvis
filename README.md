@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/complex-joins/carvis.svg?branch=master)](https://travis-ci.org/complex-joins/carvis)
 # carvis
 
 ## This is the parent folder for the Carvis project. 
