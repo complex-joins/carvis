@@ -80,6 +80,7 @@
     "react-google-maps": "^4.11.0",
     "react-router": "^2.6.1",
     "redis": "^2.6.2",
+    "storkSQL": "^0.1.16",
     "style-loader": "^0.13.1",
     "twilio": "^2.9.2",
     "webpack": "^1.13.1"
