@@ -20,13 +20,13 @@ Client side: web app and Amazon Alexa Skill.
 Tools used for reverse-engineering: [Charles Proxy](https://www.charlesproxy.com/), [APKtool](https://ibotpeaches.github.io/Apktool/), [APK extractor](https://play.google.com/store/apps/details?id=com.ext.ui&hl=en), [SSL Kill Switch 2](https://github.com/nabla-c0d3/ssl-kill-switch2), [Cydia](https://cydia.saurik.com/).
 
 ## Possible challenges: 
-*Packet sniffing via MITM procedure. 
-*SSL pinning. 
-*Device rooting. 
-*Native iPhone/Andorid security.
-*Reconstruction of end-points. 
-*Reconstruction of headers.
-*Surge pricing. 
+* Packet sniffing via MITM procedure. 
+* SSL pinning. 
+* Device rooting. 
+* Native iPhone/Andorid security.
+* Reconstruction of end-points. 
+* Reconstruction of headers.
+* Surge pricing. 
 
 ### Installing Dependencies
 
