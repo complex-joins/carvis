@@ -4,7 +4,7 @@
 
 ## Team
 
-Built by @alexcstark, @cpruijsen, @daredia, @JasonArkens17 as our final project @hackreactor .
+Built by `@alexcstark`, `@cpruijsen`, `@daredia`, `@JasonArkens17` as our final project `@hackreactor` .
 
 ## Stack
 
@@ -17,7 +17,7 @@ Testing: TravisCI, Mocha, Chai, Karma.
 APIs: Uber, Lyft, Google Places, Twilio.
 Client side: web app and Amazon Alexa Skill.
 
-Tools used for reverse-engineering: Charles Proxy, APKtool, APK extractor, SSL Kill Switch 2, Cydia.
+Tools used for reverse-engineering: [Charles Proxy](https://www.charlesproxy.com/), [APKtool](https://ibotpeaches.github.io/Apktool/), [APK extractor](https://play.google.com/store/apps/details?id=com.ext.ui&hl=en), [SSL Kill Switch 2](https://github.com/nabla-c0d3/ssl-kill-switch2), [Cydia](https://cydia.saurik.com/).
 
 ### Installing Dependencies
 
