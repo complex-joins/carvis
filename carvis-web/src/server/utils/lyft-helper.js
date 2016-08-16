@@ -60,11 +60,9 @@ var lyftPhoneAuth = function (phoneNumberString) {
     });
 };
 
-// NOTE: userLocation should come from the user client // Alexa.
 var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, userId) {
 
-  userId = userId || null;
-
+  userId = userId || null; // alexaUserId
   userLocation = userLocation || null;
 
   var url = lyftMethods.phoneCodeAuth.path;
@@ -160,7 +158,8 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
     })
     .then(function (data) {
       console.log('successful requestRide post LYFT', data);
-      var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
+      var response = lyftMethods.requestRide.responseMethod(data, tripDuration);
+
       // var dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
       var dbpostURL = 'http://localhost:8080/rides/' + rideId;
 
@@ -178,10 +177,10 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
           return res.json();
         })
         .then(function (data) {
-          console.log('success posting user', data);
+          console.log('success updating ride', data);
         })
         .catch(function (err) {
-          console.warn('err posting user', err);
+          console.warn('err updating ride', err);
         });
 
     })
@@ -190,10 +189,57 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
     });
 };
 
+var cancelRide = function (token, userLocation, rideId) {
+  var url = lyftMethods.cancelRide.path(rideId);
+  var headers = lyftMethods.cancelRide.headers(token);
+  var body = lyftMethods.cancelRide.body(userLocation);
+
+  fetch(url, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify(body)
+    })
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      console.log('successful cancelRide PUT LYFT', data);
+      var response = lyftMethods.cancelRide.responseMethod(data);
+
+      // var dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
+      var dbpostURL = 'http://localhost:8080/rides/' + rideId;
+
+      // once we receive the request-ride confirmation response
+      // we update the DB record for that ride with eta and vendorRideId
+      fetch(dbpostURL, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': APItoken
+          },
+          body: JSON.stringify(response)
+        })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          console.log('success updating ride', data);
+        })
+        .catch(function (err) {
+          console.warn('err updating ride', err);
+        });
+
+    })
+    .catch(function (err) {
+      console.log('error PUT of cancelRide LYFT', err);
+    });
+};
+
 module.exports = {
   refreshBearerToken: refreshBearerToken,
   lyftPhoneAuth: lyftPhoneAuth,
   lyftPhoneCodeAuth: lyftPhoneCodeAuth,
   getCost: getCost,
-  requestRide: requestRide
+  requestRide: requestRide,
+  cancelRide: cancelRide
 };
