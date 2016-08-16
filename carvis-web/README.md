@@ -1,6 +1,6 @@
 # Carvis
 
-> Pithy project description
+Your personal ride-share money saving servant! Get and order the cheapest ride. Also integrated with an [Amazon Alexa skill](https://github.com/complex-joins/alexa-poc) 
 
 ## Team
 
