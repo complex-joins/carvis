@@ -160,7 +160,8 @@ var requestRide = function (token, costToken, destination, origin, paymentInfo, 
     })
     .then(function (data) {
       console.log('successful requestRide post LYFT', data);
-      var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
+      var response = lyftMethods.requestRide.responseMethod(data, tripDuration);
+
       // var dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
       var dbpostURL = 'http://localhost:8080/rides/' + rideId;
 
