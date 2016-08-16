@@ -48,7 +48,7 @@ npm start
 ###Moving Forward
 
 From here you will need to link to the [Carvis-api](https://github.com/complex-joins/carvis-api) or spin up your own server. 
-
+Also this repo does not include any of the Alexa skill side of the project. For Alexa skill go [here](https://github.com/complex-joins/alexa-poc)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
