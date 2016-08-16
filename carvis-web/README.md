@@ -45,9 +45,9 @@ Run the following command for a static build
 npm start
 ```
 
-### Roadmap
+###Moving Forward
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+From here you will need to link to the [Carvis-api](https://github.com/complex-joins/carvis-api) or spin up your own server. 
 
 ## Contributing
 
