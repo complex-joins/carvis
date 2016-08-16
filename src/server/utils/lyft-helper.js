@@ -1,10 +1,13 @@
 var fetch = require('node-fetch');
 var btoa = require('btoa');
 var lyftMethods = require('./lyftPrivateMethods');
-var auth = lyftMethods.appConfig.appId + ':' + lyftMethods.appConfig.appSecret;
+var auth = require('./../../../secret/config.js')
+  .LYFT_USER_ID;
+var APItoken = require('./../../../secret/config.js')
+  .CARVIS_API_KEY;
+var APIserver = require('./../../../secret/config.js')
+  .CARVIS_API;
 var baseURL = 'https://api.lyft.com/v1/'; // on which path is added.
-
-// TODO: database posts in each response -- with generic key naming.
 
 var refreshBearerToken = function () {
   var url = 'https://api.lyft.com/oauth/token';
@@ -28,7 +31,6 @@ var refreshBearerToken = function () {
     .then(function (data) {
       var lyftBearerToken = data.token_type + ' ' + data.access_token;
       var expiration = data.expires_in; // 86400 seconds || 1 day.
-      // TODO: DB post
     })
     .catch(function (err) {
       console.log('LYFT Bearer token error', err);
@@ -52,8 +54,6 @@ var lyftPhoneAuth = function (phoneNumberString) {
     })
     .then(function (data) {
       console.log('successful phoneNumber post LYFT', data);
-      // response irrelevant unless we pass through session
-      // DB post.
     })
     .catch(function (err) {
       console.log('error post of phoneNumber LYFT', err);
@@ -61,12 +61,14 @@ var lyftPhoneAuth = function (phoneNumberString) {
 };
 
 // NOTE: userLocation should come from the user client // Alexa.
-var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, session, userLocation) {
+var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, userLocation, userId) {
 
-  userLocation = userLocation || null; // pass through userLocation if we have one, otherwise use randomly generated location.
+  userId = userId || null;
+
+  userLocation = userLocation || null;
 
   var url = lyftMethods.phoneCodeAuth.path;
-  var headers = lyftMethods.phoneCodeAuth.headers(session);
+  var headers = lyftMethods.phoneCodeAuth.headers();
   var body = lyftMethods.phoneCodeAuth.body(fourDigitCode, phoneNumber, userLocation);
 
   console.log('lyftPhoneCodeAuth number', fourDigitCode, phoneNumber, 'body', body, 'headers', headers, 'url', url);
@@ -80,22 +82,42 @@ var lyftPhoneCodeAuth = function (fourDigitCode, phoneNumber, session, userLocat
       return res.json();
     })
     .then(function (data) {
-      console.log('successful phoneCodeAuth post LYFT', data);
+      // console.log('successful phoneCodeAuth post LYFT', data);
 
       // the responseMethod function returns an object with the parameters we need for subsequent operations only, and in a key-name generalised manner.
-      // TODO: DB POST // responseObject.dbUserProps (email, name etc.)
-      var response = lyftMethods.phoneCodeAuth.responseMethod(data);
+      var response = lyftMethods.phoneCodeAuth.responseMethod(data, userId);
+
+      // POST THE USER DATA TO OUR RELATIONAL DATABASE
+      // var dbpostURL = 'http://' + APIserver + '/users/updateOrCreate';
+      var dbpostURL = 'http://localhost:8080/users/updateOrCreate';
+
+      fetch(dbpostURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': APItoken
+          },
+          body: JSON.stringify(response)
+        })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          console.log('success posting user', data);
+        })
+        .catch(function (err) {
+          console.warn('err posting user', err);
+        });
 
     })
     .catch(function (err) {
       console.log('error post of phoneCodeAuth LYFT', err);
     });
 };
-// origin {startLat, startLng, startAddress}
-// destination {endLat, endLng, endAddress}
-var getCost = function (token, session, origin, destination) {
-  var url = baseURL + lyftMethods.getCost.path(origin, destination);
-  var headers = lyftMethods.getCost.headers(token, session);
+
+var getCost = function (token, origin, destination, paymentInfo, partySize, rideId) {
+  var url = lyftMethods.getCost.path(origin, destination);
+  var headers = lyftMethods.getCost.headers(token);
 
   fetch(url, {
       method: 'GET',
@@ -105,27 +127,28 @@ var getCost = function (token, session, origin, destination) {
       return res.json();
     })
     .then(function (data) {
-      console.log('successful getCost post LYFT', data);
-
-      // TODO: DB POST
+      console.log('successful getCost LYFT', data);
       var response = lyftMethods.getCost.responseMethod(data);
-      // do something with response.tripDuration ?
-      var time = Math.random() * 4 + 1; // random time 1-5 seconds.
-      setTimeout(function () {
-        return requestRide(token, session, response.costToken, destination, origin, paymentInfo, partySize); // this is the next step, TODO: params.
-      }, time);
 
+      // random time 1-5 seconds - to simulate more 'natural' patterns
+      var time = Math.random() * 4 + 1;
+      setTimeout(function () {
+        return requestRide(token, response.costToken, destination, origin, paymentInfo, partySize, rideId, response.tripDuration);
+      }, time);
     })
     .catch(function (err) {
-      console.log('error post of getCost LYFT', err);
+      console.log('error getCost LYFT', err);
     });
 
 };
 
-var requestRide = function (token, session, costToken, destination, origin, paymentInfo, partySize) {
-  var url = baseURL + lyftMethods.requestRide.path;
-  var headers = lyftMethods.requestRide.headers(token, session);
+var requestRide = function (token, costToken, destination, origin, paymentInfo, partySize, rideId, tripDuration) {
+  var url = lyftMethods.requestRide.path;
+  var headers = lyftMethods.requestRide.headers(token);
   var body = lyftMethods.requestRide.body(costToken, destination, origin, paymentInfo, partySize);
+
+  console.log('costToken pre requestRide', costToken);
+  console.log('body pre requestRide', body);
 
   fetch(url, {
       method: 'POST',
@@ -137,10 +160,30 @@ var requestRide = function (token, session, costToken, destination, origin, paym
     })
     .then(function (data) {
       console.log('successful requestRide post LYFT', data);
+      var response = lyftMethods.requestRide.responseMethod(data, userId, tripDuration);
+      // var dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
+      var dbpostURL = 'http://localhost:8080/rides/' + rideId;
 
-      // TODO: DB POST
-      var responseObject = lyftMethods.requestRide.responseMethod(data);
-      // next step?
+      // once we receive the request-ride confirmation response
+      // we update the DB record for that ride with eta and vendorRideId
+      fetch(dbpostURL, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': APItoken
+          },
+          body: JSON.stringify(response)
+        })
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          console.log('success posting user', data);
+        })
+        .catch(function (err) {
+          console.warn('err posting user', err);
+        });
+
     })
     .catch(function (err) {
       console.log('error post of requestRide LYFT', err);

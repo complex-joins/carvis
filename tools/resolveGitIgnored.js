@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const PRIVATE_DIR = path.join(__dirname, '/../../carvis-private-info');
+const PRIVATE_DIR = path.join(__dirname, '/../../../carvis-private-info');
 
 let fileDirectory = fs.readdirSync(PRIVATE_DIR);
 fileDirectory = fileDirectory.filter((file) => file[0] !== '.');

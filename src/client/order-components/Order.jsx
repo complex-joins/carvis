@@ -27,11 +27,11 @@ export default class Order extends React.Component {
           <form className="container">
             <div className="form-group">
               From:
-              <input type="text blackTextInput"/>
+              <input type="text" className="blackTextInput"/>
             </div>
             <div className="form-group">
               To:
-              <input type="text blackTextInput"/>
+              <input type="text" className="blackTextInput"/>
             </div>
           </form>
         </div>
@@ -71,7 +71,7 @@ export default class Order extends React.Component {
     // make call to order car using from and to locations
   }
 
-  handleMapClick(event) {
+  handleMapClick(event) { // NOTE: are we adding a market for every click?!
     let {markers} = this.state;
     markers = update(markers, {
       $push: [
