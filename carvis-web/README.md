@@ -1,6 +1,6 @@
 # Carvis
 
-Your personal ride-share money saving servant! Get and order the cheapest ride. Also integrated with an [Amazon Alexa skill](https://github.com/complex-joins/alexa-poc) 
+Your personal ride-share money saving servant! Get estimates and order the cheapest ride between Uber and Lyft. Also integrated with an [Amazon Alexa skill](https://github.com/complex-joins/alexa-poc) 
 
 ## Team
 
