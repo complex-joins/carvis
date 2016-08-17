@@ -1,34 +1,34 @@
-var fetch = require('node-fetch');
-var uberMethods = require('./uberPrivateMethods');
-var APItoken = require('./../../../secret/config.js')
-  .CARVIS_API_KEY;
-var APIserver = require('./../../../secret/config.js')
-  .CARVIS_API;
-var baseURL = 'https://cn-sjc1.uber.com';
+import fetch from 'node-fetch';
+import { login, confirmPickup } from './../utils/uberPrivateMethods.js';
+const baseURL = 'https://cn-sjc1.uber.com';
+const APItoken = !process.env.PROD ? require('./../../../secret/config.js')
+  .CARVIS_API_KEY : process.env.CARVIS_API_KEY;
+const APIserver = !process.env.PROD ? require('../../../secret/config.js')
+  .CARVIS_API : process.env.CARVIS_API;
 
-var login = function (username, password, userId) {
-  var path = baseURL + uberMethods.login.path;
-  var body = uberMethods.login.body(username, password);
-  var headers = uberMethods.login.headers();
+export const uberLogin = (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  let userId = req.body.userId || null; // alexaUserId
 
-  userId = userId || null; // alexaUserId
+  let path = baseURL + login.path;
+  let body = login.body(username, password);
+  let headers = login.headers();
 
   fetch(path, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body)
     })
-    .then(function (res) {
+    .then(res => {
       return res.json();
     })
-    .then(function (data) {
-      var response = uberMethods.login.responseMethod(data, password, userId);
+    .then(data => {
+      let response = login.responseMethod(data, password, userId);
 
       // POST THE USER DATA TO OUR RELATIONAL DATABASE
-      // var dbpostURL = 'http://' + APIserver + '/users/updateOrCreate';
-      var dbpostURL = 'http://localhost:8080/users/updateOrCreate';
-
-      console.log('response pre DB post', response);
+      let dbpostURL = 'http://' + APIserver + '/users/updateOrCreate';
+      //let dbpostURL = 'http://localhost:8080/users/updateOrCreate';
 
       fetch(dbpostURL, {
           method: 'POST',
@@ -38,26 +38,26 @@ var login = function (username, password, userId) {
           },
           body: JSON.stringify(response)
         })
-        .then(function (res) {
+        .then(res => {
           return res.json();
         })
-        .then(function (data) {
+        .then(data => {
           console.log('success posting user', data);
         })
-        .catch(function (err) {
+        .catch(err => {
           console.warn('err posting user', err);
         });
 
     })
-    .catch(function (err) {
+    .catch(err => {
       console.log('ERROR login UBER', err);
     });
 };
 
 // var requestRide = function (origin) { // origin is the home location
-//   var path = baseURL + uberMethods.requestRide.path;
-//   var body = uberMethods.requestRide.body(origin);
-//   var headers = uberMethods.requestRide.headers();
+//   var path = baseURL + requestRide.path;
+//   var body = requestRide.body(origin);
+//   var headers = requestRide.headers();
 //
 //   fetch(path, {
 //       method: 'POST',
@@ -69,7 +69,7 @@ var login = function (username, password, userId) {
 //     })
 //     .then(function (data) {
 //       // DB post all data.
-//       var response = uberMethods.requestRide.responseMethod(data);
+//       var response = requestRide.responseMethod(data);
 //
 //       var time = Math.random() * 4 + 1; // random time 1-5 seconds.
 //       setTimeout(function () {
@@ -82,25 +82,30 @@ var login = function (username, password, userId) {
 //     });
 // };
 
-var confirmPickup = function (userLocation, token, destination, rideId) {
-  var path = baseURL + uberMethods.confirmPickup.path;
-  var body = uberMethods.confirmPickup.body(destination, userLocation);
-  var headers = uberMethods.confirmPickup.headers(userLocation, token);
+export const uberConfirmPickup = (req, res) => {
+
+  let origin = req.body.origin;
+  let token = req.body.token;
+  let destination = req.body.destination;
+  let rideId = req.body.rideId;
+
+  let path = baseURL + confirmPickup.path;
+  let body = confirmPickup.body(destination, origin);
+  let headers = confirmPickup.headers(origin, token);
 
   fetch(path, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body)
     })
-    .then(function (res) {
+    .then(res => {
       return res.json();
     })
-    .then(function (data) {
-      // DB post all data.
-      var response = uberMethods.confirmPickup.responseMethod(data);
-
-      // var dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
-      var dbpostURL = 'http://localhost:8080/rides/' + rideId;
+    .then(data => {
+      console.log('uber confirmPickup data', data);
+      let response = confirmPickup.responseMethod(data);
+      let dbpostURL = 'http://' + APIserver + '/rides/' + rideId;
+      //let dbpostURL = 'http://localhost:8080/rides/' + rideId;
 
       // once we receive the request-ride confirmation response
       // we update the DB record for that ride with eta and vendorRideId
@@ -112,24 +117,18 @@ var confirmPickup = function (userLocation, token, destination, rideId) {
           },
           body: JSON.stringify(response)
         })
-        .then(function (res) {
+        .then(res => {
           return res.json();
         })
-        .then(function (data) {
+        .then(data => {
           console.log('success posting user', data);
         })
-        .catch(function (err) {
+        .catch(err => {
           console.warn('err posting user', err);
         });
 
     })
-    .catch(function (err) {
-      console.log('ERROR login UBER', err);
+    .catch(err => {
+      console.log('ERROR pickup UBER', err);
     });
-};
-
-module.exports = {
-  login: login,
-  // requestRide: requestRide,
-  confirmPickup: confirmPickup
 };
