@@ -1,16 +1,21 @@
-const helperAPItoken = require('./../../../secret/config.js')
-  .CARVIS_HELPER_API_KEY;
+const CARVIS_HELPER_API_KEY = !process.env.PROD ? require('./../../../secret/config.js')
+  .CARVIS_HELPER_API_KEY : process.env.CARVIS_HELPER_API_KEY;
+const CARVIS_HELPER_API = !process.env.PROD ? require('./../../../secret/config.js')
+  .CARVIS_HELPER_API : process.env.CARVIS_HELPER_API;
+
 
 export default function (app) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
     let phoneNumber = req.body.phoneNumber;
     console.log('phone number is ', phoneNumber);
 
-    fetch('http://localhost:8888/lyft/phoneauth', {
+    var helperURL = CARVIS_HELPER_API + '/lyft/phoneauth';
+
+    fetch(helperURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': helperAPItoken
+          'x-access-token': CARVIS_HELPER_API_KEY
         },
         body: JSON.stringify(req.body) // pass through the body.
       })
@@ -32,11 +37,13 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
     let phoneNumber = req.body.phoneNumber;
     console.log('got code', lyftCode);
 
-    fetch('http://localhost:8888/lyft/phoneCodeAuth', {
+    var helperURL = CARVIS_HELPER_API + '/lyft/phoneCodeAuth';
+
+    fetch(helperURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': helperAPItoken
+          'x-access-token': CARVIS_HELPER_API_KEY
         },
         body: JSON.stringify(req.body) // pass through body.
       })
@@ -55,11 +62,13 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
 
   app.post('/auth/uberAuth', (req, res) => { // user|pw Uber login
 
-    fetch('http://localhost:8888/uber/login', {
+    var helperURL = CARVIS_HELPER_API + '/uber/login';
+
+    fetch(helperURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': helperAPItoken
+          'x-access-token': CARVIS_HELPER_API_KEY
         },
         body: JSON.stringify(req.body) // pass through body.
       })
