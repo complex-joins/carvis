@@ -1,12 +1,12 @@
 import fetch from 'node-fetch';
 import btoa from 'btoa';
 import { phoneAuth, phoneCodeAuth, getCost, requestRide, shareETA, cancelRide } from './../utils/lyftPrivateMethods';
-const auth = require('./../../../secret/config.js')
-  .LYFT_USER_ID;
-const APItoken = require('./../../../secret/config.js')
-  .CARVIS_API_KEY;
-const APIserver = require('./../../../secret/config.js')
-  .CARVIS_API;
+const auth = !process.env.PROD ? require('./../../../secret/config.js')
+  .LYFT_USER_ID : process.env.LYFT_USER_ID;
+const APItoken = !process.env.PROD ? require('./../../../secret/config.js')
+  .CARVIS_API_KEY : process.env.CARVIS_API_KEY;
+const APIserver = !process.env.PROD ? require('./../../../secret/config.js')
+  .CARVIS_API : process.env.CARVIS_API;
 const baseURL = 'https://api.lyft.com/v1/';
 
 export const lyftRefreshBearerToken = (req, res) => {
@@ -31,6 +31,7 @@ export const lyftRefreshBearerToken = (req, res) => {
     .then(data => {
       let lyftBearerToken = data.token_type + ' ' + data.access_token;
       let expiration = data.expires_in; // 86400 seconds || 1 day.
+      console.log(data); // TODO: send this somewhere.
     })
     .catch(err => {
       console.log('LYFT Bearer token error', err);

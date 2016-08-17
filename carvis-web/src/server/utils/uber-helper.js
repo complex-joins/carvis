@@ -2,9 +2,9 @@ import fetch from 'node-fetch';
 import { login, confirmPickup } from './../utils/uberPrivateMethods.js';
 const baseURL = 'https://cn-sjc1.uber.com';
 const APItoken = !process.env.PROD ? require('./../../../secret/config.js')
-  .CARVIS_API_KEY : null;
+  .CARVIS_API_KEY : process.env.CARVIS_API_KEY;
 const APIserver = !process.env.PROD ? require('../../../secret/config.js')
-  .CARVIS_API : null;
+  .CARVIS_API : process.env.CARVIS_API;
 
 export const uberLogin = (req, res) => {
   let username = req.body.username;
@@ -84,14 +84,14 @@ export const uberLogin = (req, res) => {
 
 export const uberConfirmPickup = (req, res) => {
 
-  let userLocation = req.body.userLocation;
+  let origin = req.body.origin;
   let token = req.body.token;
   let destination = req.body.destination;
   let rideId = req.body.rideId;
 
   let path = baseURL + confirmPickup.path;
-  let body = confirmPickup.body(destination, userLocation);
-  let headers = confirmPickup.headers(userLocation, token);
+  let body = confirmPickup.body(destination, origin);
+  let headers = confirmPickup.headers(origin, token);
 
   fetch(path, {
       method: 'POST',
