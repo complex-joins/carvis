@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 # Carvis
-=======
-[![Build Status](https://travis-ci.org/complex-joins/carvis.svg?branch=master)](https://travis-ci.org/complex-joins/carvis) [![bitHound Overall Score](https://www.bithound.io/github/complex-joins/carvis/badges/score.svg)](https://www.bithound.io/github/complex-joins/carvis) 
-# carvis
->>>>>>> feba00a4bae40a97db2c07ae83b922604e3c9d77
+[![Build Status](https://travis-ci.org/complex-joins/carvis.svg?branch=master)](https://travis-ci.org/complex-joins/carvis) [![bitHound Overall Score](https://www.bithound.io/github/complex-joins/carvis/badges/score.svg)](https://www.bithound.io/github/complex-joins/carvis)
 
 Your personal ride-share money saving servant! Get estimates and order the cheapest ride between Uber and Lyft. Also integrated with an [Amazon Alexa skill](https://github.com/complex-joins/alexa-poc) 
 
@@ -24,14 +20,14 @@ Client side: web app and Amazon Alexa Skill.
 
 Tools used for reverse-engineering: [Charles Proxy](https://www.charlesproxy.com/), [APKtool](https://ibotpeaches.github.io/Apktool/), [APK extractor](https://play.google.com/store/apps/details?id=com.ext.ui&hl=en), [SSL Kill Switch 2](https://github.com/nabla-c0d3/ssl-kill-switch2), [Cydia](https://cydia.saurik.com/).
 
-## Possible challenges: 
-* Packet sniffing via MITM procedure. 
-* SSL pinning. 
-* Device rooting. 
+## Possible challenges:
+* Packet sniffing via MITM procedure.
+* SSL pinning.
+* Device rooting.
 * Native iPhone/Andorid security.
-* Reconstruction of end-points. 
+* Reconstruction of end-points.
 * Reconstruction of headers.
-* Surge pricing. 
+* Surge pricing.
 
 ### Installing Dependencies
 
@@ -61,7 +57,7 @@ npm start
 
 ###Moving Forward
 
-From here you will need to link to the [Carvis-api](https://github.com/complex-joins/carvis-api) or spin up your own server. 
+From here you will need to link to the [Carvis-api](https://github.com/complex-joins/carvis-api) or spin up your own server.
 Also this repo does not include any of the Alexa skill side of the project. For Alexa skill go [here](https://github.com/complex-joins/alexa-poc)
 ## Contributing
 
