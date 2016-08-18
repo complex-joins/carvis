@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 # Carvis
+=======
+[![Build Status](https://travis-ci.org/complex-joins/carvis.svg?branch=master)](https://travis-ci.org/complex-joins/carvis) [![bitHound Overall Score](https://www.bithound.io/github/complex-joins/carvis/badges/score.svg)](https://www.bithound.io/github/complex-joins/carvis) 
+# carvis
+>>>>>>> feba00a4bae40a97db2c07ae83b922604e3c9d77
 
 Your personal ride-share money saving servant! Get estimates and order the cheapest ride between Uber and Lyft. Also integrated with an [Amazon Alexa skill](https://github.com/complex-joins/alexa-poc) 
 
