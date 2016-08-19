@@ -1,22 +1,16 @@
 import React from 'react';
-import SimpleMap from './Map';
-import update from 'react-addons-update';
+import Map from './Map';
+import OrderForm from './OrderForm';
+import { findPlaces } from './googlePlacesHelpers';
+import {findCurrentLocation} from './googleMapsHelper';
+import {initializeMap, addCurrentLocation} from './googleMapsHelper';
+import {addAutoComplete} from './googlePlacesHelpers';
 
 export default class Order extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      markers: [
-        {
-          position: {
-            lat: 37.7806521,
-            lng: -122.4088319
-          },
-          key: `Hack Reactor`,
-          defaultAnimation: 2
-        }
-      ]
-    };
+    this.googlePlacesKey = 'AIzaSyA5ncIxJbYX2kx_v74oyou3KxYecYpMJCw';
+    this.currentLocation = findCurrentLocation();
   }
 
   render() {
@@ -24,45 +18,34 @@ export default class Order extends React.Component {
       <div className="row container fullHeight">
         <div className="fullHeight col-md-3">
           <p>Order a car</p>
-          <form className="container">
-            <div className="form-group">
-              From:
-              <input type="text" className="blackTextInput"/>
-            </div>
-            <div className="form-group">
-              To:
-              <input type="text" className="blackTextInput"/>
-            </div>
-          </form>
+          <OrderForm handlePlacesSearch={this.handlePlacesSearch.bind(this)}/>
         </div>
-        <div className="fullHeight col-md-9">
-          <SimpleMap
-            markers={this.state.markers}
-            onMapClick={this.handleMapClick.bind(this)}
-            onMarkerRightclick={this.handleMarkerRightclick.bind(this)}/>
-        </div>
-
+        <Map currentLocation={this.currentLocation}/>
+        <script type="text/javascript" src={'https://maps.googleapis.com/maps/api/js?key=' + this.googlePlacesKey + '&libraries=places'}></script>
       </div>
     );
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   let { markers } = this.state;
-    //   markers = update(markers, {
-    //     $push: [
-    //       {
-    //         position: {
-    //           lat: 25.99,
-    //           lng: 122.9,
-    //         },
-    //         defaultAnimation: 2,
-    //         key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
-    //       },
-    //     ],
-    //   });
-    //   this.setState({ markers });
-    // }, 2000);
+    this.map = initializeMap();
+    addCurrentLocation(this.map);
+    addAutoComplete(this.map);
+  }
+
+  handleOriginSearch(e) {
+    e.preventDefault();
+    // findPlaces(this.currentLocation, e., this.map);
+  }
+
+  handleOrigin(e) {
+
+  }
+
+  handleDestination(e) {
+    // let destination = e.target.value;
+    // let destinationCall = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${destination}&key=${this.googlePlacesKey}`;
+    // axios.get(destinationCall)
+    // .then((res) => console.log(res));
   }
 
 
@@ -71,32 +54,4 @@ export default class Order extends React.Component {
     // make call to order car using from and to locations
   }
 
-  handleMapClick(event) { // NOTE: are we adding a market for every click?!
-    let {markers} = this.state;
-    markers = update(markers, {
-      $push: [
-        {
-          position: event.latLng,
-          defaultAnimation: 2,
-          key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
-        }
-      ]
-    });
-    this.setState({markers});
-  }
-
-  handleMarkerRightclick(index, event) {
-    /*
-    * All you modify is data, and the view is driven by data.
-    * This is so called data-driven-development. (And yes, it's now in
-    * web front end and even with google maps API.)
-    */
-    let {markers} = this.state;
-    markers = update(markers, {
-      $splice: [
-        [index, 1]
-      ]
-    });
-    this.setState({markers});
-  }
 }
