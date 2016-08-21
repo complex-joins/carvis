@@ -20,4 +20,3 @@ export default class MainLayout extends React.Component {
       );
   }
 }
-// {React.cloneElement(this.props.children, this.props)}

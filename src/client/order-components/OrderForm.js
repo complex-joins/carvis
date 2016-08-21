@@ -12,21 +12,25 @@ export default class OrderForm extends React.Component {
   render() {
     return (
       <div className="fullHeight">
-        <form className="container" onSubmit={this.props.handleOriginSearch}>
+        <form className="container" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             From:
-            <input type="text" name="origin" onChange={this.handleChange.bind(this)} id="originTextField" className="blackTextInput" />
+            <input type="text" name="origin" id="origin" className="blackTextInput" />
           </div>
         </form>
-        <form className="container" onSubmit={this.props.handleDestinationSearch}>
+        <form className="container" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             To:
-            <input type="text" name="destination" id="destinationTextField" onChange={this.handleChange.bind(this)} className="blackTextInput" />
+            <input type="text" name="destination" id="destination" className="blackTextInput" />
           </div>
           <button >GO</button>
         </form>
       </div>
     );
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
   }
 
   handleChange(e) {
