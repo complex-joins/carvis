@@ -1,8 +1,6 @@
-const CARVIS_HELPER_API_KEY = !process.env.PROD ? require('./../../../secret/config.js')
-  .CARVIS_HELPER_API_KEY : process.env.CARVIS_HELPER_API_KEY;
-const CARVIS_HELPER_API = !process.env.PROD ? require('./../../../secret/config.js')
-  .CARVIS_HELPER_API : process.env.CARVIS_HELPER_API;
-
+const CARVIS_HELPER_API_KEY = process.env.CARVIS_HELPER_API_KEY;
+const CARVIS_HELPER_API = process.env.CARVIS_HELPER_API;
+import fetch from 'node-fetch';
 
 export default function (app) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
@@ -61,7 +59,6 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
   });
 
   app.post('/auth/uberAuth', (req, res) => { // user|pw Uber login
-
     var helperURL = CARVIS_HELPER_API + '/uber/login';
 
     fetch(helperURL, {
