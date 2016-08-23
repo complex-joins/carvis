@@ -1,5 +1,5 @@
 # Carvis
-[![Build Status](https://travis-ci.org/complex-joins/carvis.svg?branch=master)](https://travis-ci.org/complex-joins/carvis) [![bitHound Overall Score](https://www.bithound.io/github/complex-joins/carvis/badges/score.svg)](https://www.bithound.io/github/complex-joins/carvis)
+[![Build Status](https://travis-ci.org/complex-joins/carvis.svg?branch=master)](https://travis-ci.org/complex-joins/carvis) [![bitHound Overall Score](https://www.bithound.io/github/complex-joins/carvis/badges/score.svg)](https://www.bithound.io/github/complex-joins/carvis) [![bitHound Dependencies](https://www.bithound.io/github/complex-joins/carvis/badges/dependencies.svg)](https://www.bithound.io/github/complex-joins/carvis/master/dependencies/npm)
 
 Your personal ride-share money saving servant! Get estimates and order the cheapest ride between Uber and Lyft. Also integrated with an [Amazon Alexa skill](https://github.com/complex-joins/alexa-poc) 
 
