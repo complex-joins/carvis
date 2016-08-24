@@ -56,10 +56,9 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
       // TODOs: 
         // grab secret from env var
         // change expiresIn to '1 day'
-        // dont create a token if user already has one (like if they've authed with uber)
 
       // create a token
-      let token = jwt.sign({ id: data.id, email: data.email }, 'shdonttell', {
+      let token = jwt.sign({ id: data.id }, 'shdonttell', {
         expiresIn: 300
       });
 
@@ -87,10 +86,13 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
       .then(function (data) {
         let message = 'success uber auth';
         console.log(message, data);
-        
-        // TODO: create jwt token (if doesnt already exist), etc
+                
+        // create a token
+        let token = jwt.sign({ id: data.id }, 'shdonttell', {
+          expiresIn: 300
+        });
       
-        res.json({ user: data });
+        res.json({ token: token, user: data });
       })
       .catch(function (err) {
         console.warn('err uber auth', err);
