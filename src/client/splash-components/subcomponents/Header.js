@@ -30,9 +30,6 @@ export default (props) => (
               </div>
               <div className="col-sm-2"></div>
             </div>
-            <Link to="/app">
-              <button className="btn btn-danger">CHEAT MODE</button>
-            </Link>
           </div>
         </div>
       </div>

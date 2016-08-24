@@ -8,15 +8,6 @@ export default class Auth extends React.Component {
         <h1>Authorize your application</h1>
         <ul className="list-inline banner-social-buttons">
           <li>
-            <Link to="/auth/login">
-              <div className="btn btn-default btn-lg carIconHolder">
-                <img className="carIcon" src="../img/carvisicon.png" alt=""/>
-                <span className="network-name">Login</span>
-                <i className="fa fa-sign-in padLeft"></i>
-              </div>
-            </Link>
-          </li>
-          <li>
             <Link to="/lyftAuth">
               <div className="btn btn-default btn-lg carIconHolder">
                 <img className="carIcon" src="../img/lyfticon.png" alt=""/>
