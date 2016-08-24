@@ -58,6 +58,8 @@ export default class UberAuth extends React.Component {
     axios.post('/auth/uberAuth', this.state)
     .then((res) => {
       console.log(res);
+      let nextRoute = (res.data.user.lyftToken) ? '/app' : '/lyftAuth';
+      this.props.history.push(nextRoute);
     });
   }
 }

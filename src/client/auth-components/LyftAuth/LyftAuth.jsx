@@ -45,10 +45,11 @@ export default class LyftAuth extends React.Component {
     axios.post('/auth/lyftCode', {lyftCode: this.state.lyftCode, phoneNumber: this.state.phoneNumber})
     .then((res) => {
       console.log(res);
+      let nextRoute = (res.data.user.uberToken) ? '/app' : '/uberAuth';
+      this.props.history.push(nextRoute);
     });
-    this.props.history.push('/app');
   }
-//
+
   handlePhoneNumber(e) {
     e.preventDefault();
     this.setState({
