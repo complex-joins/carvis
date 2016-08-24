@@ -96,13 +96,4 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
         console.warn('err uber auth', err);
       });
   });
-
-  app.post('/auth/signup', (req, res) => {
-    // Create user creds, walk thrme through setting up alexa, lyft, etc
-  });
-
-  app.post('/auth/login', (req, res) => {
-    // Basic auth
-  });
-
 }
