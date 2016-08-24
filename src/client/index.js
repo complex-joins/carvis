@@ -4,7 +4,7 @@ import App from './App';
 import Splash from './splash-components/Splash';
 import Auth from './auth-components/Auth';
 import authHelper from './auth-components/auth-helpers';
-import {LyftAuth, UberAuth, Login} from './auth-components/AuthComponents';
+import {LyftAuth, UberAuth, Logout} from './auth-components/AuthComponents';
 import MainLayout from './layout-components/MainLayout';
 import NoMatch from './layout-components/NoMatch';
 import UserProfile from './profile-components/UserProfile';
@@ -28,12 +28,11 @@ ReactDOM.render(
     <Route path="/" component={MainLayout}>
       <IndexRoute component={Splash}></IndexRoute>
       <Route path="app" component={App} onEnter={requireAuth}></Route>
-      <Route path="auth" component={Auth}>
-        <Route path="login" component={Login}></Route>
-      </Route>
+      <Route path="auth" component={Auth}></Route>
       <Route path="lyftAuth" component={LyftAuth}></Route>
       <Route path="uberAuth" component={UberAuth}></Route>
       <Route path=":userid/profile" component={UserProfile}></Route>
+      <Route path="logout" component={Logout}></Route>
     </Route>
     <Route path="*" component={NoMatch}></Route>
   </Router>

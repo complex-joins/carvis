@@ -34,6 +34,9 @@ function determineNavButtons(props) {
         <li>
           <a className="page-scroll" href="#contact">Contact</a>
         </li>
+        <li>
+          <Link to="/logout">Log Out</Link>
+        </li>
       </ul>
     );
   case '/lyftAuth':
