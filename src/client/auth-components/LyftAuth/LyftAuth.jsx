@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {LyftPhoneNumber, LyftCode} from '../AuthComponents';
+import authHelper from '../auth-helpers';
 
 export default class LyftAuth extends React.Component {
   constructor(props) {
@@ -45,6 +46,11 @@ export default class LyftAuth extends React.Component {
     axios.post('/auth/lyftCode', {lyftCode: this.state.lyftCode, phoneNumber: this.state.phoneNumber})
     .then((res) => {
       console.log(res);
+
+      if (!authHelper.loggedIn()) {
+        authHelper.login(res.data.token);  
+      }
+      
       let nextRoute = (res.data.user.uberToken) ? '/app' : '/uberAuth';
       this.props.history.push(nextRoute);
     });

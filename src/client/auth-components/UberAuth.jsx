@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import authHelper from './auth-helpers';
 
 export default class UberAuth extends React.Component {
   constructor(props) {
@@ -58,6 +59,11 @@ export default class UberAuth extends React.Component {
     axios.post('/auth/uberAuth', this.state)
     .then((res) => {
       console.log(res);
+
+      if (!authHelper.loggedIn()) {
+        authHelper.login(res.data.token);  
+      }
+
       let nextRoute = (res.data.user.lyftToken) ? '/app' : '/lyftAuth';
       this.props.history.push(nextRoute);
     });
