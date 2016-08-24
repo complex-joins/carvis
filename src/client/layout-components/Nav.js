@@ -64,6 +64,17 @@ function determineNavButtons(props) {
         </li>
       </ul>
     );
+  case '/app':
+    return (
+      <ul className="nav navbar-nav">
+        <li className="hidden">
+          <a href="#page-top"></a>
+        </li>
+        <li>
+          <Link to="/logout">Log Out</Link>
+        </li>
+      </ul>
+    );
   default:
     return (<ul className="nav navbar-nav"></ul>);
   }
