@@ -1,21 +1,18 @@
-const CARVIS_HELPER_API_KEY = !process.env.PROD ? require('./../../../secret/config.js')
-  .CARVIS_HELPER_API_KEY : process.env.CARVIS_HELPER_API_KEY;
-const CARVIS_HELPER_API = !process.env.PROD ? require('./../../../secret/config.js')
-  .CARVIS_HELPER_API : process.env.CARVIS_HELPER_API;
-
+const CARVIS_API_KEY = process.env.CARVIS_API_KEY;
+const CARVIS_API = process.env.CARVIS_API;
 
 export default function (app) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
     let phoneNumber = req.body.phoneNumber;
     console.log('phone number is ', phoneNumber);
 
-    var helperURL = CARVIS_HELPER_API + '/lyft/phoneauth';
+    let url = CARVIS_API + '/lyft/phoneauth';
 
-    fetch(helperURL, {
+    fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': CARVIS_HELPER_API_KEY
+          'x-access-token': CARVIS_API_KEY
         },
         body: JSON.stringify(req.body) // pass through the body.
       })
@@ -37,13 +34,13 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
     let phoneNumber = req.body.phoneNumber;
     console.log('got code', lyftCode);
 
-    var helperURL = CARVIS_HELPER_API + '/lyft/phoneCodeAuth';
+    let url = CARVIS_API + '/lyft/phoneCodeAuth';
 
-    fetch(helperURL, {
+    fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': CARVIS_HELPER_API_KEY
+          'x-access-token': CARVIS_API_KEY
         },
         body: JSON.stringify(req.body) // pass through body.
       })
@@ -51,10 +48,10 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
         return res.json();
       })
       .then(function (data) {
-        console.log('success lyft phone auth', data);
+        console.log('success lyft phone code auth', data);
       })
       .catch(function (err) {
-        console.warn('err lyft phone auth', err);
+        console.warn('err lyft phone code auth', err);
       });
 
     res.json({ message: 'yes!' });
@@ -62,13 +59,13 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
 
   app.post('/auth/uberAuth', (req, res) => { // user|pw Uber login
 
-    var helperURL = CARVIS_HELPER_API + '/uber/login';
+    let url = CARVIS_API + '/uber/login';
 
-    fetch(helperURL, {
+    fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': CARVIS_HELPER_API_KEY
+          'x-access-token': CARVIS_API_KEY
         },
         body: JSON.stringify(req.body) // pass through body.
       })
@@ -76,10 +73,10 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
         return res.json();
       })
       .then(function (data) {
-        console.log('success lyft phone auth', data);
+        console.log('success uber login', data);
       })
       .catch(function (err) {
-        console.warn('err lyft phone auth', err);
+        console.warn('err uber login', err);
       });
 
     res.json({ message: 'on its way' });
