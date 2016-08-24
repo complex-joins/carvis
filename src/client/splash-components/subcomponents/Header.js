@@ -14,7 +14,7 @@ export default (props) => (
             <div className="row">
               <div className="col-sm-2"></div>
               <div className="col-sm-3">
-                <Link to="auth">
+                <Link to="/app">
                   <div href="#" className="btn btn-default btn-lg page-scroll">
                     Get Started
                     <i className="fa fa-sign-in padLeft" aria-hidden="true"></i>
