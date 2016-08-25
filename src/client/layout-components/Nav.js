@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import authHelper from '../auth-components/auth-helpers';
 // NAV
 export default (props) => {
   return (
@@ -21,6 +22,13 @@ export default (props) => {
 };
 
 function determineNavButtons(props) {
+  let loginButton;
+  if (authHelper.loggedIn()) {
+    loginButton = <Link to="/logout">Log Out</Link>;
+  } else {
+    loginButton = <Link to="/auth">Log In</Link>;
+  }
+
   switch (props.location) {
   case '/':
     return (
@@ -33,6 +41,9 @@ function determineNavButtons(props) {
         </li>
         <li>
           <a className="page-scroll" href="#contact">Contact</a>
+        </li>
+        <li>
+          {loginButton}
         </li>
       </ul>
     );
@@ -58,6 +69,17 @@ function determineNavButtons(props) {
         </li>
         <li>
           <Link to="/lyftAuth">Switch to Lyft</Link>
+        </li>
+      </ul>
+    );
+  case '/app':
+    return (
+      <ul className="nav navbar-nav">
+        <li className="hidden">
+          <a href="#page-top"></a>
+        </li>
+        <li>
+          <Link to="/logout">Log Out</Link>
         </li>
       </ul>
     );

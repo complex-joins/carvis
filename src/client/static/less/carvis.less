@@ -237,26 +237,6 @@ a {
 }
 
 
-#map {
-    width: 100%;
-    height: 200px;
-    margin-top: 100px;
-}
-
-@media(min-width:767px) {
-    .content-section {
-        padding-top: 250px;
-    }
-
-    .download-section {
-        padding: 100px 0;
-    }
-
-    #map {
-        height: 400px;
-        margin-top: 250px;
-    }
-}
 
 .btn {
     text-transform: uppercase;
@@ -361,4 +341,90 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.max-height {
+  height: 100%;
+}
+
+.black-text {
+  color: black;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.pad-right {
+  padding-right: 10px;
+}
+
+.app-background {
+  background-color: #222;
+  color: white;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.eightyhxw {
+  width: 80%;
+  height: 80%;
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+#map {
+  height: 100%;
+  width: 100%
+}
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+  border-color: #4d90fe;
+}
+
+#mode-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  margin-left: 12px;
+  padding: 5px 11px 0px 11px;
+}
+
+#mode-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
 }

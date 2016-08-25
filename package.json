@@ -6,7 +6,7 @@
   "scripts": {
     "build:client": "node ./tools/scripts/prod-client.js",
     "start:dev": "webpack -w & npm run build:server -- -w & nodemon -L ./dist/server/index.js",
-    "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2,es2016 --copy-files",
+    "build:server": "babel ./src/server -d ./dist/server --presets es2015,stage-2,es2016 --source-maps --copy-files",
     "setup": "cd ../..; git clone https://github.com/alexcstark/carvis-private-info.git; cd -; node ./tools/resolveGitIgnored.js; cd ..; rm -rf carvis-private-info",
     "test": "npm run build; mocha --compilers js:babel-core/register test/index.js",
     "build": "npm run build:client; npm run build:server",
@@ -69,6 +69,7 @@
     "express-qs-parser": "0.0.1",
     "express-session": "^1.14.0",
     "file-loader": "^0.9.0",
+    "jsonwebtoken": "^7.1.9",
     "knex": "^0.11.10",
     "lodash": "^4.14.2",
     "node-fetch": "^1.6.0",
