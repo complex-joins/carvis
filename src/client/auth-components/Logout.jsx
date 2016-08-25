@@ -10,7 +10,9 @@ export default class Logout extends React.Component {
 
   render() {
     return (
-      <p>You have been logged out. Redirecting shortly to home...</p>
+      <h2 className="container content-section text-center">
+        You have been logged out. Redirecting to home...
+      </h2>
     );
   }
 }
