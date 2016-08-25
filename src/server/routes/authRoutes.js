@@ -1,5 +1,6 @@
 const CARVIS_HELPER_API_KEY = process.env.CARVIS_HELPER_API_KEY;
 const CARVIS_HELPER_API = process.env.CARVIS_HELPER_API;
+const JWT_SECRET = process.env.JWT_SECRET;
 import fetch from 'node-fetch';
 import jwt from 'jsonwebtoken'; // used to create, sign, and verify tokens
 
@@ -54,7 +55,7 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
       console.log(message, data);
 
       // create a token
-      let token = jwt.sign({ id: data.id }, 'shdonttell', {
+      let token = jwt.sign({ id: data.id }, JWT_SECRET, {
         expiresIn: '1 day'
       });
 
@@ -84,7 +85,7 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
         console.log(message, data);
                 
         // create a token
-        let token = jwt.sign({ id: data.id }, 'shdonttell', {
+        let token = jwt.sign({ id: data.id }, JWT_SECRET, {
           expiresIn: '1 day'
         });
       
