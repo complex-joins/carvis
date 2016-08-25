@@ -61,7 +61,14 @@ export default class UberAuth extends React.Component {
       console.log(res);
 
       if (!authHelper.loggedIn()) {
-        authHelper.login(res.data.token);  
+        if (res.data.token) {
+          // login succeeded, store token
+          authHelper.login(res.data.token);  
+        } else {
+          // login failed, let user try again
+          this.props.history.push('/auth');
+          return;
+        }
       }
 
       let nextRoute = (res.data.user.lyftToken) ? '/app' : '/lyftAuth';
