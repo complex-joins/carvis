@@ -52,14 +52,10 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
     .then(function (data) {
       let message = 'success lyft phone code auth';
       console.log(message, data);
-      
-      // TODOs: 
-        // grab secret from env var
-        // change expiresIn to '1 day'
 
       // create a token
       let token = jwt.sign({ id: data.id }, 'shdonttell', {
-        expiresIn: 300
+        expiresIn: '1 day'
       });
 
       res.json({ token: token, user: data });
@@ -89,7 +85,7 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
                 
         // create a token
         let token = jwt.sign({ id: data.id }, 'shdonttell', {
-          expiresIn: 300
+          expiresIn: '1 day'
         });
       
         res.json({ token: token, user: data });
