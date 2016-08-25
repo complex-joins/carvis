@@ -7,10 +7,8 @@ import jwt from 'jsonwebtoken'; // used to create, sign, and verify tokens
 export default function (app) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
     console.log('phone number is ', req.body.phoneNumber);
-    //let url = 'http://' + CARVIS_API + '/lyft/phoneauth';
-    //fetch(url, {
-    let helperURL = CARVIS_HELPER_API + '/lyft/phoneauth';
-    fetch(helperURL, {
+    let url = 'http://' + CARVIS_API + '/lyft/phoneauth';
+    fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,12 +34,8 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
     let phoneNumber = req.body.phoneNumber;
     console.log('got code', lyftCode, 'for number', phoneNumber);
 
-    //   let url = CARVIS_API + '/lyft/phoneCodeAuth';
-    //   fetch(url, {
-
-    let helperURL = CARVIS_HELPER_API + '/lyft/phoneCodeAuth';
-
-    fetch(helperURL, {
+    let url = CARVIS_API + '/lyft/phoneCodeAuth';
+    fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,10 +63,9 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
   });
 
   app.post('/auth/uberAuth', (req, res) => { // user|pw Uber login
-    //  let url = CARVIS_API + '/uber/login';
-    let helperURL = CARVIS_HELPER_API + '/uber/login';
-    // fetch(url, {
-    fetch(helperURL, {
+    let url = CARVIS_API + '/uber/login';
+
+    fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
