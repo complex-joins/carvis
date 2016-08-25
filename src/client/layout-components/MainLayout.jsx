@@ -4,9 +4,6 @@ import Nav from './Nav';
 export default class MainLayout extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      inAuth: false
-    };
   }
 
   render() {

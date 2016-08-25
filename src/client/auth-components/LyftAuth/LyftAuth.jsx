@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {LyftPhoneNumber, LyftCode} from '../AuthComponents';
+import authHelper from '../auth-helpers';
 
 export default class LyftAuth extends React.Component {
   constructor(props) {
@@ -45,10 +46,23 @@ export default class LyftAuth extends React.Component {
     axios.post('/auth/lyftCode', {lyftCode: this.state.lyftCode, phoneNumber: this.state.phoneNumber})
     .then((res) => {
       console.log(res);
+
+      if (!authHelper.loggedIn()) {
+        if (res.data.token) {
+          // login succeeded, store token
+          authHelper.login(res.data.token);  
+        } else {
+          // login failed, let user try again
+          this.props.history.push('/auth');
+          return;
+        }
+      }
+      
+      let nextRoute = (res.data.user.uberToken) ? '/app' : '/uberAuth';
+      this.props.history.push(nextRoute);
     });
-    this.props.history.push('/app');
   }
-//
+
   handlePhoneNumber(e) {
     e.preventDefault();
     this.setState({
@@ -59,21 +73,4 @@ export default class LyftAuth extends React.Component {
       console.log(code);
     });
   }
-
 }
-
-// DUMB VERSION
-// export default (props) => (
-//   <div className="container">
-//     <form action="/auth/lyftAuth" method="POST">
-//       <div className="form-group row">
-//         <div className="col-xs-3"></div>
-//         <label htmlFor="example-tel-input" className="col-xs-2 col-form-label">Phone Number Used For Lyft Account</label>
-//         <div className="col-xs-3">
-//           <input className="form-control blackTextInput" type="tel" id="tel-input"/>
-//         </div>
-//       </div>
-//       <button type="submit" className="btn btn-primary">Submit</button>
-//     </form>
-//   </div>
-// );
