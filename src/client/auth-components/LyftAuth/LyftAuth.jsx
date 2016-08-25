@@ -43,14 +43,23 @@ export default class LyftAuth extends React.Component {
 
   handleCode(e) {
     e.preventDefault(e);
-    axios.post('/auth/lyftCode', {lyftCode: this.state.lyftCode, phoneNumber: this.state.phoneNumber})
+    
+    let body = {
+      lyftCode: this.state.lyftCode, 
+      phoneNumber: this.state.phoneNumber
+    };
+    if (authHelper.loggedIn()) {
+      body.jwtToken = authHelper.getToken();
+    }
+
+    axios.post('/auth/lyftCode', body)
     .then((res) => {
       console.log(res);
 
       if (!authHelper.loggedIn()) {
-        if (res.data.token) {
+        if (res.data.jwtToken) {
           // login succeeded, store token
-          authHelper.login(res.data.token);  
+          authHelper.login(res.data.jwtToken);  
         } else {
           // login failed, let user try again
           this.props.history.push('/auth');

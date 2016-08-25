@@ -13,5 +13,9 @@ module.exports = {
     this.onChange(false);
   },
 
+  getToken() {
+    return localStorage.token;
+  },
+
   onChange() {}
 };
