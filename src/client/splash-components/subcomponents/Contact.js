@@ -4,7 +4,7 @@ export default (props) => (
   <section id="contact" className="container content-section text-center">
     <div className="row">
       <div className="col-lg-12">
-        <h2>Contact the Complex Joins Team!</h2>
+        <h4>Contact the CARVIS Team</h4>
 
         <div className="row">
           <div className="col-sm-4"></div>
