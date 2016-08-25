@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default (props) => (
-  <div className="container text-center">
+  <div className="text-center">
     <p>Enter your phone number</p>
     <form onSubmit={props.submit}>
       <div className="form-group">

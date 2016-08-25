@@ -10,7 +10,8 @@ export default (props) => {
         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
           Menu <i className="fa fa-bars"></i>
         </button>
-        <Link className="navbar-brand page-scroll" to ="/">Find a Car</Link>
+        <Link className="navLogo" to="/"><img src="../img/carvisicon.png" alt=""/></Link>
+        <Link className="navbar-brand page-scroll" to ="/">Carvis</Link>
       </div>
       <div className="collapse navbar-collapse navbar-right navbar-main-collapse">
         {determineNavButtons(props)}
