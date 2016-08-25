@@ -1,12 +1,12 @@
 const CARVIS_API_KEY = process.env.CARVIS_API_KEY;
 const CARVIS_API = process.env.CARVIS_API;
+import fetch from 'node-fetch';
 
 export default function (app) { // LYFT 2FA - first call sends SMS to user
   app.post('/auth/lyftAuth', (req, res) => {
-    let phoneNumber = req.body.phoneNumber;
-    console.log('phone number is ', phoneNumber);
-
-    let url = CARVIS_API + '/lyft/phoneauth';
+    let body = req.body;
+    console.log('phone number is ', body.phoneNumber);
+    let url = 'http://' + CARVIS_API + '/lyft/phoneauth';
 
     fetch(url, {
         method: 'POST',
@@ -14,7 +14,7 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
           'Content-Type': 'application/json',
           'x-access-token': CARVIS_API_KEY
         },
-        body: JSON.stringify(req.body) // pass through the body.
+        body: body // pass through the body.
       })
       .then(function (res) {
         return res.json();
