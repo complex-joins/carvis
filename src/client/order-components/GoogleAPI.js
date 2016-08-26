@@ -25,7 +25,6 @@ export const initMap = () => {
   let origin = {};
   let destination = {};
   let userId = 1; // hardcoded.
-  //let carvisRideId;
 
   map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
@@ -147,39 +146,6 @@ export const initMap = () => {
         carvisTime.innerHTML =
           '<p class="pad-right no-margin"> Carvis Estimated Cost | Lyft: ' + formatAnswer('cheap', data.lyftEstimatedFare) + ' | Uber: ' + formatAnswer('cheap', data.uberEstimatedFare) + '<button class="black-text" id="order-cheapest-car">Order Cheapest Car</button></p> ';
 
-        // getEstimate already posts to the DB.
-        // // addRide - web client -> web api -> carvis api -> DB
-        // let addRideURL = `http://localhost:8000/internal/addRide`; // hardcoded.
-        // let lyftEstimatedFare = data.lyftEstimatedFare || 1000000;
-        // let uberEstimatedFare = data.uberEstimatedFare || 1000000;
-        // let winner = {};
-        // winner.estimate = lyftEstimatedFare < uberEstimatedFare ? lyftEstimatedFare : uberEstimatedFare;
-        // winner.vendor = lyftEstimatedFare < uberEstimatedFare ? 'Lyft' : 'Uber';
-        // winner.estimateType = 'fare';
-        // let body = {
-        //   winner: winner,
-        //   userId: userId,
-        //   origin: origin,
-        //   destination: destination
-        // };
-        // // if (carvisRideId) {
-        // //   body.carvisRideId = carvisRideId;
-        // // }
-        //
-        // return fetch(addRideURL, {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //       // token
-        //     },
-        //     body: JSON.stringify(body)
-        //   })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     console.log('success ETA POST Addride', data);
-        //     //carvisRideId = data.id;
-        //   })
-        //   .catch(err => console.warn('error ETA POST Addride', err));
       })
       .catch(err => console.warn('error in getEstimate POST COST', err));
 
@@ -201,42 +167,6 @@ export const initMap = () => {
         carvisTime.innerHTML =
           '<p class="pad-right no-margin"> Carvis Estimated Time | Lyft: ' + formatAnswer('fast', data.lyftEstimatedETA) + ' | Uber: ' + formatAnswer('fast', data.uberEstimatedETA) + '<button  class="black-text" id="order-fastest-car">Order Fastest Car</button></p> ';
 
-        // getEstimate already posts to the DB.    
-        // // addRide - web client -> web api -> carvis api -> DB
-        // let addRideURL = `http://localhost:8000/internal/addRide`; // hardcoded.
-        // let lyftEstimatedETA = data.lyftEstimatedETA || 1000000;
-        // let uberEstimatedETA = data.uberEstimatedETA || 1000000;
-        // let winner = {};
-        // winner.estimate = lyftEstimatedETA < uberEstimatedETA ? lyftEstimatedETA : uberEstimatedETA;
-        // winner.vendor = lyftEstimatedETA < uberEstimatedETA ? 'Lyft' : 'Uber';
-        // winner.estimateType = 'eta';
-        // let body = {
-        //   winner: winner,
-        //   userId: userId,
-        //   origin: origin,
-        //   destination: destination
-        // };
-        //
-        // // add the rideId to body in case the other call previously returned
-        // // note: this is improbable - and the best way around this has to be discussed. Winning vendor might also differ with time vs cost, and we'd probably want to keep track of both - or overwrite somehow ?
-        // // if (carvisRideId) {
-        // //   body.carvisRideId = carvisRideId;
-        // // }
-        //
-        // return fetch(addRideURL, {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //       // token
-        //     },
-        //     body: JSON.stringify(body)
-        //   })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     console.log('success ETA POST Addride', data);
-        //     //carvisRideId = data.id;
-        //   })
-        //   .catch(err => console.warn('error ETA POST Addride', err));
       })
       .catch(err => console.warn('error in getEstimate POST ETA', err));
 

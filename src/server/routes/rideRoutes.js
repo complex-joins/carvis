@@ -36,29 +36,6 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
       .then(err => console.warn('error POST getEstimate to API', err));
   });
 
-  app.post('/internal/addRide', (req, res) => {
-    // do the userId decryption
-
-    let url = `http://localhost:8080/web/addRide`;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': process.env.CARVIS_API_KEY
-        },
-        body: JSON.stringify(req.body)
-      })
-      .then(res => res.json())
-      .then(data => {
-        console.log('success POST addRide to API', data);
-        // NOTE: in future shield sensitive info from client.
-        // similar to lyftPrivateMethods logic.
-        res.json(data);
-      })
-      .then(err => console.warn('error POST addRide to API', err));
-  });
-
-
   app.post('/internal/requestRide', (req, res) => {
     // do the userId decryption
 
