@@ -5,6 +5,25 @@ import fetch from 'node-fetch';
 import jwt from 'jsonwebtoken'; // used to create, sign, and verify tokens
 
 export default function (app) { // LYFT 2FA - first call sends SMS to user
+  // route middleware to verify a token
+  app.use('/auth', function(req, res, next) {
+    let jwtToken = req.body.jwtToken || req.query.jwtToken || req.headers['x-access-jwtToken'];
+
+    if (jwtToken) {
+      jwt.verify(jwtToken, JWT_SECRET, function(err, decoded) {
+        if (err) {
+          return res.json({ success: false, message: 'Failed to authenticate jwtToken'});
+        } else {
+          req.body.carvisUserId = decoded.id;
+          console.log('req.body inside app.use middleware:', req.body);
+          next();
+        }
+      })
+    } else {
+      next();
+    }
+  });
+
   app.post('/auth/lyftAuth', (req, res) => {
     let url = 'http://' + CARVIS_API + '/lyft/phoneauth';
     fetch(url, {
@@ -38,11 +57,11 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
         let message = 'success lyft phone code auth';
 
         // create a token
-        let token = jwt.sign({ id: data.id }, JWT_SECRET, {
+        let jwtToken = jwt.sign({ id: data.id }, JWT_SECRET, {
           expiresIn: '1 day'
         });
 
-        res.json({ token: token, user: data });
+        res.json({ jwtToken: jwtToken, user: data });
       })
       .catch(err => console.warn('err lyft phone code auth', err));
   });
@@ -61,10 +80,11 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
       .then(res => res.json())
       .then(data => {
         // create a token
-        let token = jwt.sign({ id: data.id }, JWT_SECRET, {
+        let jwtToken = jwt.sign({ id: data.id }, JWT_SECRET, {
           expiresIn: '1 day'
         });
-        res.json({ token: token, user: data });
+        
+        res.json({ jwtToken: jwtToken, user: data });
       })
       .catch(err => console.warn('err uber auth', err));
   });

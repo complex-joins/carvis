@@ -5,7 +5,7 @@ Your personal ride-share money saving servant! Get estimates and order the cheap
 
 ## Team
 
-Built by `@alexcstark`, `@cpruijsen`, `@daredia`, `@JasonArkens17` as our final project `@hackreactor` .
+Built by `@alexcstark`, `@cpruijsen`, `@daredia`, `@JasonArkens17`.
 
 ## Stack
 
@@ -58,7 +58,7 @@ npm start
 ###Moving Forward
 
 From here you will need to link to the [Carvis-api](https://github.com/complex-joins/carvis-api) or spin up your own server.
-Also this repo does not include any of the Alexa skill side of the project. For Alexa skill go [here](https://github.com/complex-joins/alexa-poc)
+Also this repo does not include any of the Alexa Skill components of the application. For the Alexa Skill go [here](https://github.com/complex-joins/alexa-poc)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
