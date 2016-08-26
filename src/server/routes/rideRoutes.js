@@ -20,9 +20,18 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
       .then(res => res.json())
       .then(data => {
         console.log('success POST getEstimate to API', data);
-        res.json(data);
-        // NOTE: in future shield sensitive info from client.
-        // similar to lyftPrivateMethods logic.
+        let sanitizeResponse = (data) => {
+          let response = {
+            lyftEstimatedFare: data.lyftEstimatedFare,
+            uberEstimatedFare: data.uberEstimatedFare,
+            lyftEstimatedETA: data.lyftEstimatedETA,
+            uberEstimatedETA: data.uberEstimatedETA
+          };
+          return response;
+        }
+        let response = sanitizeResponse(data);
+
+        res.json(response);
       })
       .then(err => console.warn('error POST getEstimate to API', err));
   });
