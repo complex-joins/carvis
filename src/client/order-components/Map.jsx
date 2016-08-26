@@ -1,6 +1,6 @@
 import React from 'react';
 // import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-import initMap from './GoogleAPI';
+import { initMap } from './GoogleAPI';
 
 export default class Map extends React.Component {
   constructor(props) {
