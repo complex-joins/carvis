@@ -27,11 +27,11 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
             lyftEstimatedETA: data.lyftEstimatedETA,
             uberEstimatedETA: data.uberEstimatedETA,
             id: data.id,
-            originLat: data.originLat,
-            originLng: data.originLng,
+            originLat: Number(data.originLat),
+            originLng: Number(data.originLng),
             originRoutableAddress: data.originRoutableAddress,
-            destinationLat: data.destinationLat,
-            destinationLng: data.destinationLng,
+            destinationLat: Number(data.destinationLat),
+            destinationLng: Number(data.destinationLng),
             destinationRoutableAddress: data.destinationRoutableAddress,
             winner: data.winner
           };

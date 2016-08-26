@@ -22,7 +22,6 @@ const formatAnswer = (mode, value) => {
 const rideETA = {};
 const rideFare = {};
 
-// TODO: link this up to the button.
 export const requestRide = (mode) => {
   let url = `http://localhost:8000/internal/requestRide`;
   let body = {
@@ -45,13 +44,13 @@ export const requestRide = (mode) => {
     .catch(err => console.warn('error requestRide', err));
 }
 
-export const initMap = () => {
+export const initMap = (cb) => {
   let origin_place_id = null;
   let destination_place_id = null;
   let travel_mode = 'DRIVING';
   let origin = {};
   let destination = {};
-  let userId = 1; // hardcoded.
+  let userId = 5;
 
   map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
@@ -181,6 +180,7 @@ export const initMap = () => {
         let carvisFare = document.getElementById('carvis-estimated-cost');
         carvisFare.innerHTML =
           '<p class="pad-right no-margin"> Carvis Estimated Cost | Lyft: ' + formatAnswer('cheap', data.lyftEstimatedFare) + ' | Uber: ' + formatAnswer('cheap', data.uberEstimatedFare) + '<button class="black-text" id="order-cheapest-car">Order Cheapest Car</button></p> ';
+        cb(requestRide);
       })
       .catch(err => console.warn('error in getEstimate POST COST', err));
 
@@ -212,6 +212,7 @@ export const initMap = () => {
         let carvisTime = document.getElementById('carvis-estimated-time');
         carvisTime.innerHTML =
           '<p class="pad-right no-margin"> Carvis Estimated Time | Lyft: ' + formatAnswer('fast', data.lyftEstimatedETA) + ' | Uber: ' + formatAnswer('fast', data.uberEstimatedETA) + '<button  class="black-text" id="order-fastest-car">Order Fastest Car</button></p> ';
+        cb(requestRide);
       })
       .catch(err => console.warn('error in getEstimate POST ETA', err));
 

@@ -23,7 +23,20 @@ export default class Map extends React.Component {
     );
   }
   componentDidMount() {
-    initMap();
+    initMap((cb) => {
+
+      let cheapButton = document.getElementById('order-cheapest-car');
+      let fastButton = document.getElementById('order-fastest-car');
+      if (cheapButton) {
+        cheapButton.addEventListener('click', () => {
+          console.log('click registered');
+          cb('Fare');
+        });
+      }
+      if (fastButton) {
+        fastButton.addEventListener('click', () => cb('ETA'));
+      }
+    });
   }
   getDirections(origin, destination) {
     let url = 'https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=AIzaSyBgePp9nXlZXQQfD8M88ZW8YpED-BkAD7Y';
