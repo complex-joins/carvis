@@ -57,13 +57,13 @@ export default class UberAuth extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     axios.post('/auth/uberAuth', this.state)
-    .then((res) => {
-      console.log(res);
+    .then(res => {
+      console.log('uberlogin submit', res);
 
       if (!authHelper.loggedIn()) {
         if (res.data.token) {
           // login succeeded, store token
-          authHelper.login(res.data.token);  
+          authHelper.login(res.data.token);
         } else {
           // login failed, let user try again
           this.props.history.push('/auth');

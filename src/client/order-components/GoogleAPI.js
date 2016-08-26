@@ -18,6 +18,33 @@ const formatAnswer = (mode, value) => {
   return winnerEstimate;
 };
 
+// hacky-global scope variables to manage state for the requestRide
+const rideETA = {};
+const rideFare = {};
+
+// TODO: link this up to the button.
+export const requestRide = (mode) => {
+  let url = `http://localhost:8000/internal/requestRide`;
+  let body = {
+    ride: mode === 'Fare' ? rideFare : rideETA
+  };
+
+  fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // token
+      },
+      body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('success requestRide', data);
+      // render cancelRide and shareETA buttons for the user.
+    })
+    .catch(err => console.warn('error requestRide', err));
+}
+
 export const initMap = () => {
   let origin_place_id = null;
   let destination_place_id = null;
@@ -126,8 +153,6 @@ export const initMap = () => {
       return body;
     };
 
-    // TODO: link up the ORDER car buttons
-
     // Cost Estimate - web client -> web server -> main api -> Lyft/Uber
     fetch(url, {
         method: 'POST',
@@ -140,12 +165,22 @@ export const initMap = () => {
       .then(res => res.json())
       .then(data => {
         console.log('success getEstimate POST COST', data);
-        // display the relevant data
-        let carvisTime = document.getElementById('carvis-estimated-cost');
-        console.log(carvisTime);
-        carvisTime.innerHTML =
-          '<p class="pad-right no-margin"> Carvis Estimated Cost | Lyft: ' + formatAnswer('cheap', data.lyftEstimatedFare) + ' | Uber: ' + formatAnswer('cheap', data.uberEstimatedFare) + '<button class="black-text" id="order-cheapest-car">Order Cheapest Car</button></p> ';
 
+        rideFare.originLat = data.originLat;
+        rideFare.originLng = data.originLng;
+        rideFare.originRoutableAddress = data.originRoutableAddress;
+        rideFare.destinationLat = data.destinationLat;
+        rideFare.destinationLng = data.destinationLng;
+        rideFare.destinationRoutableAddress = data.destinationRoutableAddress;
+        rideFare.userId = userId; // hardcoded.
+        rideFare.id = data.id;
+        rideFare.winner = data.winner;
+        rideFare.partySize = 1; // hardcoded
+
+        // display the relevant data
+        let carvisFare = document.getElementById('carvis-estimated-cost');
+        carvisFare.innerHTML =
+          '<p class="pad-right no-margin"> Carvis Estimated Cost | Lyft: ' + formatAnswer('cheap', data.lyftEstimatedFare) + ' | Uber: ' + formatAnswer('cheap', data.uberEstimatedFare) + '<button class="black-text" id="order-cheapest-car">Order Cheapest Car</button></p> ';
       })
       .catch(err => console.warn('error in getEstimate POST COST', err));
 
@@ -161,12 +196,22 @@ export const initMap = () => {
       .then(res => res.json())
       .then(data => {
         console.log('success getEstimate POST ETA', data);
+
+        rideETA.originLat = data.originLat;
+        rideETA.originLng = data.originLng;
+        rideETA.originRoutableAddress = data.originRoutableAddress;
+        rideETA.destinationLat = data.destinationLat;
+        rideETA.destinationLng = data.destinationLng;
+        rideETA.destinationRoutableAddress = data.destinationRoutableAddress;
+        rideETA.userId = userId; // hardcoded.
+        rideETA.id = data.id;
+        rideETA.winner = data.winner;
+        rideETA.partySize = 1; // hardcoded.
+
         // display the relevant data
         let carvisTime = document.getElementById('carvis-estimated-time');
-        console.log(carvisTime);
         carvisTime.innerHTML =
           '<p class="pad-right no-margin"> Carvis Estimated Time | Lyft: ' + formatAnswer('fast', data.lyftEstimatedETA) + ' | Uber: ' + formatAnswer('fast', data.uberEstimatedETA) + '<button  class="black-text" id="order-fastest-car">Order Fastest Car</button></p> ';
-
       })
       .catch(err => console.warn('error in getEstimate POST ETA', err));
 

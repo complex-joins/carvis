@@ -25,7 +25,15 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
             lyftEstimatedFare: data.lyftEstimatedFare,
             uberEstimatedFare: data.uberEstimatedFare,
             lyftEstimatedETA: data.lyftEstimatedETA,
-            uberEstimatedETA: data.uberEstimatedETA
+            uberEstimatedETA: data.uberEstimatedETA,
+            id: data.id,
+            originLat: data.originLat,
+            originLng: data.originLng,
+            originRoutableAddress: data.originRoutableAddress,
+            destinationLat: data.destinationLat,
+            destinationLng: data.destinationLng,
+            destinationRoutableAddress: data.destinationRoutableAddress,
+            winner: data.winner
           };
           return response;
         }

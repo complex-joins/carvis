@@ -50,14 +50,14 @@ export default class LyftAuth extends React.Component {
       if (!authHelper.loggedIn()) {
         if (res.data.token) {
           // login succeeded, store token
-          authHelper.login(res.data.token);  
+          authHelper.login(res.data.token);
         } else {
           // login failed, let user try again
           this.props.history.push('/auth');
           return;
         }
       }
-      
+
       let nextRoute = (res.data.user.uberToken) ? '/app' : '/uberAuth';
       this.props.history.push(nextRoute);
     });
@@ -69,8 +69,6 @@ export default class LyftAuth extends React.Component {
       waitingForCode: true
     });
     axios.post('/auth/lyftAuth', {phoneNumber: this.state.phoneNumber})
-    .then((code) => {
-      console.log(code);
-    });
+    .then(code => console.log('lyftauth submit', code));
   }
 }

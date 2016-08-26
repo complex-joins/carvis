@@ -1,13 +1,12 @@
 import React from 'react';
-// import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import { initMap } from './GoogleAPI';
 
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
+
     return (
       <div className="max-width max-height center app-background">
         <div className="center fullHeight">
