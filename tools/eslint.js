@@ -38,7 +38,7 @@ module.exports = {
 
   rules: {
     // http://eslint.org/docs/rules/
-    'array-callback-return': 'error',
+    'array-callback-return': 'error', // warn not valid for some reason.
     'default-case': ['warn', { commentPattern: '^no default$' }],
     'dot-location': ['warn', 'property'],
     eqeqeq: ['warn', 'allow-null'],

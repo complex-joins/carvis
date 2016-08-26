@@ -1,6 +1,6 @@
 import React from 'react';
 // import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-import initMap from './GoogleAPI';
+import { initMap } from './GoogleAPI';
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -11,7 +11,9 @@ export default class Map extends React.Component {
     return (
       <div className="max-width max-height center app-background">
         <div className="center fullHeight">
-          <div id="estimated-time"></div>
+          <div id="google-estimated-time"></div>
+          <div id="carvis-estimated-time"></div>
+          <div id="carvis-estimated-cost"></div>
           <input id="origin-input" className="controls" type="text"
             placeholder="Enter an origin location" />
           <input id="destination-input" className="controls" type="text"

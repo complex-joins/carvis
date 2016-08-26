@@ -30,7 +30,7 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
     let phoneNumber = req.body.phoneNumber;
     console.log('got code', lyftCode, 'for number', phoneNumber);
 
-    let url = CARVIS_API + '/lyft/phoneCodeAuth';
+    let url = 'http://' + CARVIS_API + '/lyft/phoneCodeAuth';
     fetch(url, {
         method: 'POST',
         headers: {
@@ -55,7 +55,7 @@ export default function (app) { // LYFT 2FA - first call sends SMS to user
   });
 
   app.post('/auth/uberAuth', (req, res) => { // user|pw Uber login
-    let url = CARVIS_API + '/uber/login';
+    let url = 'http://' + CARVIS_API + '/uber/login';
 
     fetch(url, {
         method: 'POST',
