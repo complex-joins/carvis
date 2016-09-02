@@ -69,7 +69,7 @@ export default class UberAuth extends React.Component {
       if (!authHelper.loggedIn()) {
         if (res.data.jwtToken) {
           // login succeeded, store token
-          authHelper.login(res.data.jwtToken);  
+          authHelper.login(res.data.jwtToken);
         } else {
           // login failed, let user try again
           this.props.history.push('/auth');

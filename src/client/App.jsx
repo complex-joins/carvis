@@ -9,4 +9,3 @@ export default class App extends React.Component {
       );
   }
 }
-// {React.cloneElement(this.props.children, this.props)}

@@ -1,13 +1,12 @@
 import React from 'react';
-// import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 import { initMap } from './GoogleAPI';
 
 export default class Map extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
+
     return (
       <div className="max-width max-height center app-background">
         <div className="center fullHeight">
@@ -24,7 +23,19 @@ export default class Map extends React.Component {
     );
   }
   componentDidMount() {
-    initMap();
+    initMap((cb) => {
+
+      let cheapButton = document.getElementById('order-cheapest-car');
+      let fastButton = document.getElementById('order-fastest-car');
+      if (cheapButton) {
+        cheapButton.addEventListener('click', () => {
+          cb('Fare');
+        });
+      }
+      if (fastButton) {
+        fastButton.addEventListener('click', () => cb('ETA'));
+      }
+    });
   }
   getDirections(origin, destination) {
     let url = 'https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=AIzaSyBgePp9nXlZXQQfD8M88ZW8YpED-BkAD7Y';
