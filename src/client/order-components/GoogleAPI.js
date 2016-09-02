@@ -1,22 +1,19 @@
 // eslint-disable
 let map;
+
 const formatAnswer = (mode, value) => {
-  if (!value) {
-    // return 'not available';
-    if (mode === 'fast') {
-      return '5 minutes';
-    } else {
-      return '$5.75';
-    }
+  // this only displays if either API doesn't return data.
+  if (!value || value < 1) {
+    return 'not available';
   }
   let winnerEstimate;
   // convert estimate to $ or minutes
   if (mode === 'fast') {
-    let minutes = Math.floor(value / 60);
+    let minutes = 0 + Math.floor(value / 60);
     winnerEstimate = minutes.toString() + ' minutes'; // always full minutes
   } else {
-    let dollars = Math.floor(value / 100);
-    let cents = Math.floor(value % 100);
+    let dollars = 0 + Math.floor(value / 100);
+    let cents = 0 + Math.floor(value % 100);
     winnerEstimate = '$' + dollars.toString() + '.';
     winnerEstimate += cents.toString();
   }
@@ -24,10 +21,11 @@ const formatAnswer = (mode, value) => {
 };
 
 // hacky-global scope variables to manage state for the requestRide
-const rideETA = {};
-const rideFare = {};
+let rideETA = {};
+let rideFare = {};
 
-export const requestRide = (mode) => {
+export const requestRide = mode => {
+  // hardcoded for now, need to pass ENV from Node -> ReactJS.
   let url = `http://localhost:8000/internal/requestRide`;
   let body = {
     ride: mode === 'Fare' ? rideFare : rideETA
@@ -43,19 +41,19 @@ export const requestRide = (mode) => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log('success requestRide', data);
+      // console.log('success requestRide', data);
       // render cancelRide and shareETA buttons for the user.
     })
     .catch(err => console.warn('error requestRide', err));
 }
 
-export const initMap = (cb) => {
+export const initMap = cb => {
   let origin_place_id = null;
   let destination_place_id = null;
   let travel_mode = 'DRIVING';
   let origin = {};
   let destination = {};
-  let userId = 5;
+  let userId = 1;
 
   map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
@@ -84,7 +82,7 @@ export const initMap = (cb) => {
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
 
-  function expandViewportToFitPlace(map, place) {
+  const expandViewportToFitPlace = (map, place) => {
     if (place.geometry.viewport) {
       map.fitBounds(place.geometry.viewport);
     } else {
@@ -93,7 +91,7 @@ export const initMap = (cb) => {
     }
   }
 
-  origin_autocomplete.addListener('place_changed', function () {
+  origin_autocomplete.addListener('place_changed', () => {
     let place = origin_autocomplete.getPlace();
     if (!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
@@ -115,7 +113,7 @@ export const initMap = (cb) => {
     route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay, origin, destination, userId);
   });
 
-  destination_autocomplete.addListener('place_changed', function () {
+  destination_autocomplete.addListener('place_changed', () => {
     let place = destination_autocomplete.getPlace();
     if (!place.geometry) {
       window.alert("Autocomplete's returned place contains no geometry");
@@ -137,17 +135,16 @@ export const initMap = (cb) => {
     route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay, origin, destination, userId);
   });
 
-  function route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay) {
+  const route = (origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay) => {
     if (!origin_place_id || !destination_place_id) {
       return;
     }
-    console.log('route invoked');
 
     // local post to router, which will pass through to getEstimate.
     // NOTE: local router will need to decrypt the production userId before CARVIS_API getEstimate post
-    let url = `http://localhost:8000/internal/getEstimate`; // hardcoded.
-    // let url = `http://${process.env.CARVIS_WEB_API}/internal/getEstimate`;
-    let body = (requestType) => {
+    // hardcoded for now, need to pass ENV from Node -> ReactJS.
+    let url = `http://localhost:8000/internal/getEstimate`;
+    let body = requestType => {
       let body = {
         requestType: requestType,
         origin: origin,
@@ -168,8 +165,7 @@ export const initMap = (cb) => {
       })
       .then(res => res.json())
       .then(data => {
-        console.log('success getEstimate POST COST', data);
-
+        console.log('cost response', data);
         rideFare.originLat = data.originLat;
         rideFare.originLng = data.originLng;
         rideFare.originRoutableAddress = data.originRoutableAddress;
@@ -200,8 +196,7 @@ export const initMap = (cb) => {
       })
       .then(res => res.json())
       .then(data => {
-        console.log('success getEstimate POST ETA', data);
-
+        console.log('ETA response', data);
         rideETA.originLat = data.originLat;
         rideETA.originLng = data.originLng;
         rideETA.originRoutableAddress = data.originRoutableAddress;
@@ -229,11 +224,9 @@ export const initMap = (cb) => {
         'placeId': destination_place_id
       },
       travelMode: travel_mode
-    }, function (response, status) {
+    }, (response, status) => {
       if (status === 'OK') {
-        console.log('driving response', response);
         let time = document.getElementById('google-estimated-time');
-        console.log(time);
         time.innerHTML =
           '<p class="pad-right no-margin"> Google Estimated Time: ' +
           getEstimatedTime(response);
@@ -245,23 +238,20 @@ export const initMap = (cb) => {
   }
 }
 
-function createMarker(place) {
-  const mark = new google.maps.Marker({
-    position: place.geometry.location,
-    map: map,
-    title: place.name,
-    id: place.id,
-  });
-  console.log(place);
-  const infoWindow = new google.maps.InfoWindow({
-    content: `<div class="info-content-container black-text">
+const createMarker = place => {
+    const mark = new google.maps.Marker({
+      position: place.geometry.location,
+      map: map,
+      title: place.name,
+      id: place.id,
+    });
+    const infoWindow = new google.maps.InfoWindow({
+      content: `<div class="info-content-container black-text">
                 <p class="info-name"><strong>${place.name}</strong></p>
                 <p class="info-address small">${place.formatted_address}</p>
               </div>`,
-  });
-  infoWindow.open(map, mark);
-}
-
-function getEstimatedTime(gapiResponse) {
-  return gapiResponse.routes[0].legs[0].duration.text;
-}
+    });
+    infoWindow.open(map, mark);
+  }
+  // get the google estimated time.
+const getEstimatedTime = gapiResponse => gapiResponse.routes[0].legs[0].duration.text;

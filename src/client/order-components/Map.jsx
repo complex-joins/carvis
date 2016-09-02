@@ -29,7 +29,6 @@ export default class Map extends React.Component {
       let fastButton = document.getElementById('order-fastest-car');
       if (cheapButton) {
         cheapButton.addEventListener('click', () => {
-          console.log('click registered');
           cb('Fare');
         });
       }

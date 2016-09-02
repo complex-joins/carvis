@@ -12,4 +12,4 @@ staticFileRoutes(app);
 authRoutes(app);
 rideRoutes(app);
 
-app.listen(PORT, () => console.log('listening on port', PORT));
+app.listen(PORT, () => console.info('listening on port', PORT));
